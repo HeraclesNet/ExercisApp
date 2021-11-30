@@ -1,12 +1,12 @@
 <template>
   <form id ="LoginForm">
-    <input type="email">
-    <input type="password">
+    <input type="email" v-model="email">
+    <input type="password" v-model="password">
     <div id = "LoginButtons">
       <button id="aceptar">
-        Iniciar Secion
+        Iniciar Sesion
       </button>
-      <button id="registrar">
+      <button id="registrar" v-on:click="getData()">
         Registrarse
       </button>
     </div>
@@ -15,7 +15,18 @@
 
 <script>
 export default {
-
+  name: "LoginBox",
+  data(){
+    return{
+        email:null,
+        password:null
+    }
+  },
+  methods:{
+    getData(){
+      console.warn("values:", this.email,this.password)
+    }
+  }
 }
 </script>
 
