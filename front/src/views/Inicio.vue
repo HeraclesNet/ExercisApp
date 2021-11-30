@@ -1,11 +1,9 @@
 <template>
   <div class="home">
     <div id = "logo">
-      <h1>Heracles</h1>
-      <h2>Retis</h2>
-      <p> Aqui iria mi slogan si tuviera uno UwU </p>
+      <img src="..\assets\Appxercise-02.png">
+      <LoginBox/>
     </div>
-    <LoginBox/>
   </div>
 </template>
 
@@ -20,15 +18,14 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Road+Rage&display=swap');
 .home {
-  float: left;
-  display: inline;
-  text-align: center
+  font-family: 'TTOctosquares-Regular Regular';
+  text-align: center;
+  color: #fff;
+  font-size: 30px
 }
 
 #logo {
-  margin: 10rem 0;
   color : #FFFBF4;
 }
 

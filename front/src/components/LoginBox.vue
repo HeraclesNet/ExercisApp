@@ -1,7 +1,15 @@
 <template>
   <form id ="LoginForm">
-    <input type="email" v-model="email">
-    <input type="password" v-model="password">
+    <md-field>
+      <md-icon>account_circle</md-icon>
+      <label>Usuario</label>
+      <md-input v-model="email"></md-input>
+    </md-field>
+    <md-field>
+      <md-icon>password</md-icon>
+      <label>Contraseña</label>
+      <md-input v-model="password"></md-input>
+    </md-field>
     <div id = "LoginButtons">
       <button id="aceptar">
         Iniciar Sesion
@@ -39,34 +47,24 @@ button {
   border-radius: 0.3rem;
   border: 0;
   color: #FFFBF4;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'TTOctosquares-Regular Regular';
 }
 
 #LoginForm {
-    box-shadow: 0 0.65rem 1rem rgba(0,0,0,1);
     background-color: #FFFBF4;
     border-radius: 0.5rem;
-    padding: 1rem 0rem;
-    display: block;
+    padding: 16px;
     width: 15rem;
-    margin-left: 60rem;
-    margin-top: -23rem;
-}
-
-#LoginForm input {
-  height: 1.5rem;
-  background-color: #DBDBDB;
-  margin: 1rem 0;
-  border-radius: 0.2rem;
-  border-color: #DBDBDB;
-  border: 0;
+    bottom: 0px;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 #LoginButtons #aceptar {
-  background-color: #08C0FF;
+  background-color: #ee2d2b;
 }
 
 #LoginButtons #registrar {
-  background-color: #D71400;
+  background-color: #bf202c;
 }
 </style>
