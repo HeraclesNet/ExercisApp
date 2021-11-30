@@ -1,23 +1,30 @@
 <template>
   <div class="Home">
-          <h1>Bienvenidos a Appxercise</h1>
-          <p>Lider en contenido para ejercicio fisico personal</p>
-      </div>
+    <div id="app"><welcome/></div>
+    <div>
+      <ul>
+        <li v-for="(users,index) in users" :key="index">
+          <h3>{{users.name}}</h3>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
-
 <script>
+import Welcome from '@/components/Welcome.vue'
+import axios from 'axios'
 export default {
-  name: 'Home'
+  name: 'Home',
+  created () {
+    axios.get('https://jsonplaceholder.typicode.com/users').then((response) => { this.users = response.data })
+  },
+  data () {
+    return {
+      users: []
+    }
+  },
+  components: {
+    Welcome
+  }
 }
 </script>
-
-<style>
-body.home {
-  font-family: 'TTOctosquares-Regular Regular';
-  text-align: center;
-  color: #fff;
-  margin-top: 200px;
-  font-size: 30px;
-  padding: 16px
-}
-</style>

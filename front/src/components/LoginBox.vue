@@ -27,7 +27,8 @@ export default {
   data () {
     return {
       email: null,
-      password: null
+      password: null,
+      usuarios: []
     }
   },
   methods: {
