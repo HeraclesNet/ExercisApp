@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "LoginBox",
   data(){
@@ -26,6 +27,11 @@ export default {
     getData(){
       console.warn("values:", this.email,this.password)
     }
+  },
+  created() {
+    axios.get("https://jsonplaceholder.typicode.com/todos/1").then((result) => {
+      console.log(result.data);
+    })
   }
 }
 </script>
