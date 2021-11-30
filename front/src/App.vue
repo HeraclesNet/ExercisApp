@@ -6,27 +6,34 @@
       <md-button :to="{name:'Registro'}" style="color:#ee2d2b">Registro <i class="material-icons" style="vertical-align:middle">dashboard</i></md-button>
       <md-button :to="{name:'Inicio'}" style="color:#ee2d2b">Ingresar <i class="material-icons" style="vertical-align:middle">login</i></md-button>
     </md-toolbar>
+    <div id="app"><welcome/></div>
   </div>
   <router-link to="/"></router-link>
   <router-view/>
 </div>
 </template>
 
-<script></script>
+<script>
+import Welcome from './components/Welcome.vue'
+
+export default {
+  name: 'App',
+  components: {
+    Welcome
+  }
+}
+
+</script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'TTOctosquares-Regular Regular';
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-   background-color: #ee2d2b
+  color: #fff;
+  margin-top: 200px;
+  font-size: 30px
   }
 .container {
-    display: flex;
     margin: 20px;
-    background-color: #ee2d2b
 }
 </style>
