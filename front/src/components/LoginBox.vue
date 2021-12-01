@@ -12,11 +12,14 @@
     </md-field>
     <div id = "LoginButtons">
       <button id="aceptar">
-        Iniciar Sesion
+        Crear cuenta
       </button>
       <button id="registrar" v-on:click="getData()">
-        Registrarse
+        Iniciar Sesion
       </button>
+    </div>
+    <div>
+      <h1>{{confirmation}}</h1>
     </div>
   </form>
 </template>
@@ -29,6 +32,7 @@ export default {
     return {
       email: null,
       password: null,
+      confirmation: null,
       usuarios: []
     }
   },
@@ -37,9 +41,9 @@ export default {
       console.warn('values:', this.email, this.password)
       axios.post('/users', {
         name: this.email,
-        enemy: this.password
+        email: this.password
       }).then(response => {
-        // Respuesta del servidor
+        this.confirmation=response.data
       }).catch(e => {
         console.log(e)
       })
