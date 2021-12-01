@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'LoginBox',
   data () {
@@ -32,8 +33,15 @@ export default {
     }
   },
   methods: {
-    getData () {
-      console.warn('values:', this.email, this.password)
+    getData : function () {
+        axios.post('/users', {
+            name: this.email,
+            enemy: this.password
+        }).then(response => {
+            // Respuesta del servidor
+        }).catch(e => {
+            console.log(e);
+        });
     }
   }
 }
