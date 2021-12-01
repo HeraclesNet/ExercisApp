@@ -35,11 +35,9 @@ export default {
   methods: {
     getData: function () {
       console.warn('values:', this.email, this.password)
-      axios.get('http://localhost:8081/users', {
-        name: this.email,
-        password: this.password
-      }).then(response => {
-        // Respuesta del servidor
+      const userlogin = { email: this.email, password: this.password }
+      axios.post('http://localhost:8081/login', userlogin).then(response => {
+        console.log(response.status)
       }).catch(e => {
         console.log(e)
       })
