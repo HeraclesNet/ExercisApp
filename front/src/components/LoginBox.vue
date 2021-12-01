@@ -33,15 +33,16 @@ export default {
     }
   },
   methods: {
-    getData : function () {
-        axios.post('/users', {
-            name: this.email,
-            enemy: this.password
-        }).then(response => {
-            // Respuesta del servidor
-        }).catch(e => {
-            console.log(e);
-        });
+    getData: function () {
+      console.warn('values:', this.email, this.password)
+      axios.post('/users', {
+        name: this.email,
+        enemy: this.password
+      }).then(response => {
+        // Respuesta del servidor
+      }).catch(e => {
+        console.log(e)
+      })
     }
   }
 }
