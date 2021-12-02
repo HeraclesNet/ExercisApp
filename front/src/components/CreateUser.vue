@@ -1,8 +1,23 @@
 <template>
   <form id ="LoginForm">
     <md-field>
-      <md-icon>account_circle</md-icon>
-      <label>Usuario</label>
+      <md-icon>emoji_people</md-icon>
+      <label>Nombre de Usuario</label>
+      <md-input v-model="nameu"></md-input>
+    </md-field>
+    <md-field>
+      <md-icon>date_range</md-icon>
+      <label>Fecha de nacimiento</label>
+      <md-input v-model="dateOfBirth"></md-input>
+    </md-field>
+    <md-field>
+      <md-icon>face</md-icon>
+      <label>Sobrenombre</label>
+      <md-input v-model="nickName"></md-input>
+    </md-field>
+    <md-field>
+      <md-icon>mail</md-icon>
+      <label>Email</label>
       <md-input v-model="email"></md-input>
     </md-field>
     <md-field>
@@ -11,11 +26,8 @@
       <md-input v-model="password"></md-input>
     </md-field>
     <div id = "LoginButtons">
-      <button id="aceptar">
-        Crear cuenta
-      </button>
-      <button id="registrar" v-on:click="getData()">
-        Iniciar Sesion
+      <button id="Create" v-on:click="getData()">
+        Crear Cuenta
       </button>
     </div>
   </form>
@@ -29,12 +41,15 @@ export default {
     return {
       email: null,
       password: null,
+      nameu: null,
+      nickname: null,
+      dateOfBirth: null,
       confirmation: null
     }
   },
   methods: {
     getData: function () {
-      const userlogin = { email: this.email, password: this.password }
+      const userlogin = { email: this.email, password: this.password, name: this.name, dateOfBirth: this.dateOfBirth, nickname: this.nickname }
       axios.post('http://localhost:8081/login', userlogin).then(response => {
         console.log(response.status)
       }).catch(e => {
@@ -67,11 +82,7 @@ button {
     margin-right:auto;
 }
 
-#LoginButtons #aceptar {
-  background-color: #ee2d2b;
-}
-
-#LoginButtons #registrar {
+#LoginButtons #Create {
   background-color: #bf202c;
 }
 </style>

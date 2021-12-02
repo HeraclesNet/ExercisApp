@@ -28,24 +28,6 @@ export default {
 #logo {
   color : #FFFBF4;
 }
-
-#logo h1 {
-  margin: 0;
-  padding: 0.1rem;
-  display: inline;
-  font-weight: 500;
-  letter-spacing: 0.2rem;
-  font-family: 'Road Rage', cursive;
-  font-size: 8rem;
-}
-
-#logo h2 {
-  margin: 0;
-  padding: 0.1rem;
-  display: inline;
-  font-size: 0.8rem;
-}
-
 #logo p{
   font-family: 'Josefin Sans', sans-serif;
   font-size: 25px;
