@@ -38,7 +38,6 @@ export default {
       axios.post('http://localhost:8081/login', userlogin).then(response => {
         console.log(response.status)
       }).catch(e => {
-        console.log(e)
       })
     }
   }
