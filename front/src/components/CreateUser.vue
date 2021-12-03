@@ -26,9 +26,12 @@
       <md-input v-model="password"></md-input>
     </md-field>
     <div id = "LoginButtons">
-      <button id="Create" v-on:click="getData()">
+      <md-button id="Create" v-on:click="getData()" style="color:#FFFBF4">
         Crear Cuenta
-      </button>
+      </md-button>
+      <md-button :to="{name:'Inicio'}" id="aceptar"  style="color:#FFFBF4">
+        Iniciar Sesion
+      </md-button>
     </div>
   </form>
 </template>
@@ -62,13 +65,9 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Road+Rage&display=swap');
-button {
-  display:block;
+.md-button {
   margin: 1rem auto;
-  padding: 0.7rem 3rem;
-  border-radius: 0.3rem;
   border: 0;
-  color: #FFFBF4;
   font-family: 'TTOctosquares-Regular Regular';
 }
 
@@ -84,5 +83,8 @@ button {
 
 #LoginButtons #Create {
   background-color: #bf202c;
+}
+#LoginButtons #aceptar {
+  background-color: #ee2d2b;
 }
 </style>
