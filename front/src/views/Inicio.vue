@@ -1,7 +1,8 @@
 <template>
   <div class="home">
     <div id = "logo">
-      <img src="..\assets\Appxercise-02.png">
+      <img src="../assets/Appxercise-02.png">
+      <!-- <img src="..\assets\Appxercise-02.png"> -->
       <LoginBox/>
     </div>
   </div>

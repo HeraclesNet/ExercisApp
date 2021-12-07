@@ -34,10 +34,18 @@ export default {
   },
   methods: {
     getData: function () {
-      const userlogin = { email: this.email, password: this.password }
-      axios.post('http://localhost:8081/login', userlogin).then(response => {
-        console.log(response.status)
+      const params = new URLSearchParams()
+      params.append('email', this.email)
+      params.append('password', this.password)
+      axios.post('http://localhost:8081/login', params,
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }).then(response => {
+        console.log(response.data)
       }).catch(e => {
+        console.log(e)
       })
     }
   }

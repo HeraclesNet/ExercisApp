@@ -3,7 +3,7 @@
     <md-field>
       <md-icon>emoji_people</md-icon>
       <label>Nombre de Usuario</label>
-      <md-input v-model="nameu"></md-input>
+      <md-input v-model="name"></md-input>
     </md-field>
     <md-field>
       <md-icon>date_range</md-icon>
@@ -44,16 +44,23 @@ export default {
     return {
       email: null,
       password: null,
-      nameu: null,
-      nickname: null,
+      name: null,
+      nickName: null,
       dateOfBirth: null,
       confirmation: null
     }
   },
   methods: {
     getData: function () {
-      const userlogin = { email: this.email, password: this.password, name: this.name, dateOfBirth: this.dateOfBirth, nickname: this.nickname }
-      axios.post('http://localhost:8081/login', userlogin).then(response => {
+      const userlogin = { email: this.email, password: this.password, name: this.name, dateOfBirth: this.dateOfBirth, nickName: this.nickName }
+      axios.post('http://localhost:8081/home/register',
+        userlogin, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+          }
+        }).then(response => {
         console.log(response.status)
       }).catch(e => {
         console.log(e)

@@ -1,7 +1,8 @@
 <template>
   <div class="registro">
     <div id = "logo">
-      <img src="..\assets\Appxercise-02.png">
+      <img src="../assets/Appxercise-02.png">
+      <!-- <img src="..\assets\Appxercise-02.png"> -->
       <CreateUser/>
     </div>
   </div>
