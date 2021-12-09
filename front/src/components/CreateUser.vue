@@ -49,11 +49,6 @@ export default {
       dateOfBirth: null
     }
   },
-  props: {
-    confirmation: {
-      type: Boolean
-    }
-  },
   methods: {
     crear: function (rt) {
       if (rt === 203) {

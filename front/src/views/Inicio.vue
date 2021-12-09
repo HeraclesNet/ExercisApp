@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <NavBarInit/>
     <div id = "logo">
       <!-- <img src="..\assets\Appxercise-02.png"> -->
       <LoginBox/>
@@ -9,10 +10,12 @@
 
 <script>
 import LoginBox from '@/components/LoginBox.vue'
+import NavBarInit from '@/components/NavBarInit.vue'
 export default {
   name: 'Inicio',
   components: {
-    LoginBox
+    LoginBox,
+    NavBarInit
   }
 }
 </script>

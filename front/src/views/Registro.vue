@@ -1,5 +1,6 @@
 <template>
   <div class="registro">
+    <NavBarInit/>
     <div id = "logo">
       <!-- <img src="..\assets\Appxercise-02.png"> -->
       <component v-bind:is="componente" v-on:aceptar="changeComponente($event)"></component>
@@ -10,6 +11,7 @@
 <script>
 import CreateUser from '@/components/CreateUser.vue'
 import Confirmacion from '@/components/Confirmacion.vue'
+import NavBarInit from '@/components/NavBarInit.vue'
 export default {
   name: 'Registro',
   methods: {
@@ -19,7 +21,8 @@ export default {
   },
   components: {
     CreateUser,
-    Confirmacion
+    Confirmacion,
+    NavBarInit
   },
   data () {
     return {
