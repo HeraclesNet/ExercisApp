@@ -46,11 +46,24 @@ export default {
       password: null,
       name: null,
       nickName: null,
-      dateOfBirth: null,
-      confirmation: null
+      dateOfBirth: null
+    }
+  },
+  props: {
+    confirmation: {
+      type: Boolean
     }
   },
   methods: {
+    crear: function (rt) {
+      if (rt === 203) {
+        this.$emit('aceptar', true)
+      } else {
+        if (rt === 404) {
+          return false
+        }
+      }
+    },
     getData: function () {
       const userlogin = { email: this.email, password: this.password, name: this.name, dateOfBirth: this.dateOfBirth, nickName: this.nickName }
       axios.post('http://localhost:8081/home/register',
@@ -62,6 +75,7 @@ export default {
           }
         }).then(response => {
         console.log(response.status)
+        this.crear(response.status)
       }).catch(e => {
         console.log(e)
       })

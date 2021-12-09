@@ -1,5 +1,11 @@
 <template>
   <form id ="LoginForm">
+    <div id="warning" v-if="confirmation">
+      <p>Contraseña incorrecta</p>
+    </div>
+    <div id="warning" v-if="existe">
+      <p>Usuario no Existe</p>
+    </div>
     <md-field>
       <md-icon>account_circle</md-icon>
       <label>Usuario</label>
@@ -11,11 +17,11 @@
       <md-input v-model="password"></md-input>
     </md-field>
     <div id = "LoginButtons">
-      <md-button :to="{name:'Registro'}" id="aceptar"  style="color:#FFFBF4">
-        Crear cuenta
-      </md-button>
       <md-button id="registrar" v-on:click="getData()" style="color:#FFFBF4">
         Iniciar Sesion
+      </md-button>
+      <md-button :to="{name:'Registro'}" id="aceptar"  style="color:#FFFBF4">
+        Crear cuenta
       </md-button>
     </div>
   </form>
@@ -29,10 +35,29 @@ export default {
     return {
       email: null,
       password: null,
-      confirmation: null
+      confirmation: false,
+      existe: false
     }
   },
   methods: {
+    ingresar: function (rt) {
+      console.warn(rt)
+      if (rt === 200) {
+        this.confirmation = false
+        this.existe = false
+        this.$router.push({ name: 'Feed' })
+      } else {
+        if (rt === 403) {
+          this.confirmation = false
+          this.existe = true
+        } else {
+          if (rt === 400) {
+            this.confirmation = true
+            this.existe = false
+          }
+        }
+      }
+    },
     getData: function () {
       const params = new URLSearchParams()
       params.append('email', this.email)
@@ -59,7 +84,15 @@ export default {
   border: 0;
   font-family: 'TTOctosquares-Regular Regular';
 }
-
+#warning{
+  background-color: #bf202c;
+  padding: 16px;
+}
+#warning p{
+  color: #FFFBF4;
+  font-family: 'TTOctosquares-Regular Regular';
+  font-size: 10px;
+}
 #LoginForm {
     background-color: #FFFBF4;
     border-radius: 0.5rem;
