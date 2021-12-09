@@ -1,4 +1,5 @@
 <template>
+
   <div class="registro">
     <NavBarInit/>
     <div id = "logo">
@@ -34,7 +35,6 @@ export default {
 <style>
 .registro {
   font-family: 'TTOctosquares-Regular Regular';
-  text-align: center;
   color: #fff;
   font-size: 30px
 }

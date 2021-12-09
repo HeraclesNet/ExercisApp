@@ -8,8 +8,17 @@
     </md-toolbar>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'NavBarInit'
+}
+</script>
+
 <style>
-.container {
-    margin: 20px;
+.container{
+  font-family: 'TTOctosquares-Regular Regular';
+  color: #fff;
+  font-size: 30px
 }
 </style>

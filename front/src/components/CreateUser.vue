@@ -95,6 +95,7 @@ export default {
     bottom: 0px;
     margin-left:auto;
     margin-right:auto;
+    text-align: center
 }
 
 #RegisterButtons{

@@ -23,7 +23,6 @@ export default {
 <style>
 .home {
   font-family: 'TTOctosquares-Regular Regular';
-  text-align: center;
   color: #fff;
   font-size: 30px
 }
