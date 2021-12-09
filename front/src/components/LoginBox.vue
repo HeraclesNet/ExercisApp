@@ -1,10 +1,10 @@
 <template>
   <form id ="LoginForm">
     <div id="warning" v-if="confirmation">
-      <p>Contraseña incorrecta</p>
+      <p>USUARIO y/o CONTRASEÑA INCORRECTA!</p>
     </div>
     <div id="warning" v-if="existe">
-      <p>Usuario no Existe</p>
+      <p>USUARIO NO EXISTE</p>
     </div>
     <md-field>
       <md-icon>account_circle</md-icon>
@@ -17,7 +17,7 @@
       <md-input v-model="password"></md-input>
     </md-field>
     <div id = "LoginButtons">
-      <md-button id="registrar" v-on:click="getData()" style="color:#FFFBF4">
+      <md-button id="registrar" v-on:click="ingresar(400)" style="color:#FFFBF4">
         Iniciar Sesion
       </md-button>
       <md-button :to="{name:'Registro'}" id="aceptar"  style="color:#FFFBF4">
@@ -86,12 +86,13 @@ export default {
 }
 #warning{
   background-color: #bf202c;
-  padding: 16px;
+  padding: 10px;
 }
 #warning p{
   color: #FFFBF4;
-  font-family: 'TTOctosquares-Regular Regular';
+  font-family: 'Roboto';
   font-size: 10px;
+  line-height: 1em
 }
 #LoginForm {
     background-color: #FFFBF4;

@@ -1,5 +1,5 @@
 <template>
-  <form id ="LoginForm">
+  <form id ="RegisterForm">
     <md-field>
       <md-icon>emoji_people</md-icon>
       <label>Nombre de Usuario</label>
@@ -25,7 +25,7 @@
       <label>Contraseña</label>
       <md-input v-model="password"></md-input>
     </md-field>
-    <div id = "LoginButtons">
+    <div id = "RegisterButtons">
       <md-button id="Create" v-on:click="getData()" style="color:#FFFBF4">
         Crear Cuenta
       </md-button>
@@ -92,20 +92,26 @@ export default {
   font-family: 'TTOctosquares-Regular Regular';
 }
 
-#LoginForm {
+#RegisterForm {
     background-color: #FFFBF4;
     border-radius: 0.5rem;
     padding: 16px;
-    width: 15rem;
+    width: 25rem;
     bottom: 0px;
     margin-left:auto;
     margin-right:auto;
 }
 
-#LoginButtons #Create {
-  background-color: #bf202c;
+#RegisterButtons{
+  display: block;
 }
-#LoginButtons #aceptar {
+
+#RegisterButtons #Create {
+  background-color: #bf202c;
+  margin-left:25px;
+  float: left;
+}
+#RegisterButtons #aceptar {
   background-color: #ee2d2b;
 }
 </style>

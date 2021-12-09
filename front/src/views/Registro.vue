@@ -1,7 +1,6 @@
 <template>
   <div class="registro">
     <div id = "logo">
-      <img src="../assets/Appxercise-02.png">
       <!-- <img src="..\assets\Appxercise-02.png"> -->
       <component v-bind:is="componente" v-on:aceptar="changeComponente($event)"></component>
     </div>
