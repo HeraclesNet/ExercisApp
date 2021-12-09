@@ -105,7 +105,7 @@ export default {
 }
 
 #LoginButtons #aceptar {
-  background-color: #ee2d2b;
+  background-color: #1d85cd;
 }
 
 #LoginButtons #registrar {

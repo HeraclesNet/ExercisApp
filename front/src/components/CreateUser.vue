@@ -112,6 +112,6 @@ export default {
   float: left;
 }
 #RegisterButtons #aceptar {
-  background-color: #ee2d2b;
+  background-color: #1d85cd;
 }
 </style>
