@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <md-toolbar>
-      <h3 class="md-title" style="flex: 1"><a href="default.aspx"><img src="../assets/Appxercise-01.png"></a></h3>
+      <h3 class="md-title" style="flex: 1"><a><img src="../assets/Appxercise-01.png"></a></h3>
       <!-- <h3 class="md-title" style="flex: 1"><a href="default.aspx"><img src=".\assets\Appxercise-01.png"></a></h3> -->
       <md-badge class="md-primary" md-content="1">
         <md-avatar>
