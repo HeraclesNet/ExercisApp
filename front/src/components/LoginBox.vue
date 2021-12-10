@@ -17,7 +17,7 @@
       <md-input v-model="password"></md-input>
     </md-field>
     <div id = "LoginButtons">
-      <md-button id="registrar" v-on:click="ingresar(200)" style="color:#FFFBF4">
+      <md-button id="registrar" v-on:click="getData()" style="color:#FFFBF4">
         Iniciar Sesion
       </md-button>
       <md-button :to="{name:'Registro'}" id="aceptar"  style="color:#FFFBF4">
@@ -41,21 +41,18 @@ export default {
   },
   methods: {
     ingresar: function (rt) {
-      console.warn(rt)
       if (rt === 200) {
         this.confirmation = false
         this.existe = false
         this.$router.push({ name: 'Feed' })
-      } else {
-        if (rt === 403) {
-          this.confirmation = false
-          this.existe = true
-        } else {
-          if (rt === 400) {
-            this.confirmation = true
-            this.existe = false
-          }
-        }
+      }
+      if (rt === 403) {
+        this.confirmation = false
+        this.existe = true
+      }
+      if (rt === 400) {
+        this.confirmation = true
+        this.existe = false
       }
     },
     getData: function () {
@@ -68,8 +65,12 @@ export default {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }).then(response => {
+        this.ingresar(response.status)
         console.log(response.data)
+        console.warn(response.status)
+        console.warn(response.data.token)
       }).catch(e => {
+        this.ingresar(e.response.status)
         console.log(e)
       })
     }

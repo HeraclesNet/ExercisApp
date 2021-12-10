@@ -3,18 +3,17 @@ export default class Post {
     Escrito = null;
     Id = null;
 
-    constructor(user, escrito, id) 
-    {
-      this.Usuario = user;
-      this.Escrito = escrito;
-      this.Id = id;
+    constructor (user, escrito, id) {
+      this.Usuario = user
+      this.Escrito = escrito
+      this.Id = id
     }
-    getUsuario()
-    {
-      return this.Usuario;
+
+    getUsuario () {
+      return this.Usuario
     }
-    getEscrito()
-    {
-      return this.Escrito;
-    }        
+
+    getEscrito () {
+      return this.Escrito
+    }
 }
