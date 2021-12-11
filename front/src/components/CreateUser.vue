@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     crear: function (rt) {
-      if (rt === 203) {
+      if (rt === 201) {
         this.$emit('aceptar', true)
       } else {
         if (rt === 404) {
