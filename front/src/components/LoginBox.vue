@@ -31,6 +31,12 @@
 import axios from 'axios'
 export default {
   name: 'LoginBox',
+  beforeCreate () {
+    document.querySelector('html').setAttribute('style', 'background-image: url("full-shot-people-doing-lunges-red-alt.jpg"); background-size: cover')
+  },
+  beforeDestroy () {
+    document.querySelector('body').setAttribute('style', '')
+  },
   data () {
     return {
       email: null,

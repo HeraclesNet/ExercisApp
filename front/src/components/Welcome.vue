@@ -1,7 +1,7 @@
 <template>
   <div class="Welcome">
-    <h1>Bienvenidos a Appxercise</h1>
-    <p>Lider en contenido para ejercicio fisico personal</p>
+    <div v-resize-text="{minFontSize: '25px', maxFontSize: '60px'}">Bienvenidos a Appxercise</div>
+    <div v-resize-text="{minFontSize: '7px', maxFontSize: '25px'}">Lider en contenido para ejercicio fisico personal</div>
  </div>
 </template>
 
@@ -11,4 +11,12 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.Welcome{
+  line-height: 20px;
+}
+div:not(:last-child) {
+  margin-top: 20px;
+  margin-bottom: 40px
+}
+</style>

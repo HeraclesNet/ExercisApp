@@ -5,8 +5,10 @@ import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
 import './assets/styles/Global.css'
 import router from './router'
+import VueResizeText from 'vue-resize-text'
 
 Vue.use(VueMaterial)
+Vue.use(VueResizeText)
 
 Vue.config.productionTip = false
 

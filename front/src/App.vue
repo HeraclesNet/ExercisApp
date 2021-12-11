@@ -8,7 +8,13 @@
 <script>
 
 export default {
-  name: 'App'
+  name: 'App',
+  beforeCreate () {
+    document.querySelector('html').setAttribute('style', 'background-image: url("full-shot-people-doing-lunges-red.jpg"); background-size: cover')
+  },
+  beforeDestroy () {
+    document.querySelector('body').setAttribute('style', '')
+  }
 }
 </script>
 
