@@ -5,7 +5,9 @@
   <div id="PostHistory">
     <ul>
       <li v-for="Post in postUser" :key="Post.id">
-        <p>{{Post.getEscrito()}}</p>
+        <div id="post">
+          <p>{{Post.getEscrito()}}</p>
+        </div>
       </li>
     </ul>
   </div>
