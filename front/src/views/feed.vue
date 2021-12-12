@@ -2,14 +2,24 @@
   <div class="feed">
   <NavBarHome/>
   <PostBar v-on:PostCreado="postear($event)"/>
-  <div id="PostHistory">
-    <ul>
-      <li v-for="Post in postUser" :key="Post.id">
-        <p>{{Post.getEscrito()}}</p>
-      </li>
-    </ul>
+  <div id="comment">
+    <div id="card" v-for="Post in postUser" :key="Post.id">
+      <md-card md-with-hover>
+        <md-ripple>
+          <md-card-content>
+            <p>{{Post.getEscrito()}}</p>
+          </md-card-content>
+        <md-card-actions>
+          <md-button class="md-icon-button">
+            <md-icon>favorite</md-icon>
+          </md-button>
+        </md-card-actions>
+      </md-ripple>
+    </md-card>
+    </div>
+    <div class="break"></div>
   </div>
-  </div>
+</div>
 </template>
 <script>
 import NavBarHome from '@/components/NavBarHome.vue'
@@ -42,10 +52,17 @@ export default {
   color: #fff;
   font-size: 30px;
   }
-#PostHistory li{
-  color: #FFFBF4;
-  font-family: 'Roboto';
-  font-size: 10px;
-  line-height: 1em
+#comment{
+  display: block;
+  flex-flow: wrap
+}
+#card {
+  margin: 4px;
+  display: flex;
+  justify-content: center;
+}
+.break {
+  flex-basis: 100%;
+  height: 0;
 }
 </style>

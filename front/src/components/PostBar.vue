@@ -6,7 +6,7 @@
           <div class="md-title">Post</div>
           <div class="md-subhead">Esto es un comentario embebido</div>
         </md-card-header>
-
+        
         <md-card-content>
           <md-field>
             <label>Contenido</label>

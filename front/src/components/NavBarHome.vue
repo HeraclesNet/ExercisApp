@@ -5,9 +5,9 @@
     <source media="(min-width: 900px)" srcset="../assets/Appxercise-01.svg">
     <source media="(min-width: 480px)" srcset="../assets/Appxercise-02.svg 250w">
     <img src="../assets/Appxercise-04.png" width="250px" alt="Appxercise">
-</picture></a></h3>
-      <!-- <h3 class="md-title" style="flex: 1"><a href="default.aspx"><img src=".\assets\Appxercise-01.png"></a></h3> -->
-      <md-badge class="md-primary" md-content="1">
+</picture>
+</a></h3>
+      <md-badge class="md-primary">
         <md-avatar>
           <md-button class="md-icon-button">
             <img src="../assets/Appxercise-04.png">
