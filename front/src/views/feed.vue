@@ -2,7 +2,6 @@
   <div class="feed">
   <NavBarHome/>
   <PostBar v-on:PostCreado="postear($event)"/>
-<<<<<<< HEAD
   <div id="comment">
     <div id="card" v-for="Post in postUser" :key="Post.id">
       <md-card md-with-hover>
@@ -19,17 +18,6 @@
     </md-card>
     </div>
     <div class="break"></div>
-=======
-  <div id="PostHistory">
-    <ul>
-      <li v-for="Post in postUser" :key="Post.id">
-        <div id="post">
-          <p>{{Post.getEscrito()}}</p>
-        </div>
-      </li>
-    </ul>
-  </div>
->>>>>>> 693b8375c1246f1a3e8f3c3e229b570366082875
   </div>
 </div>
 </template>
