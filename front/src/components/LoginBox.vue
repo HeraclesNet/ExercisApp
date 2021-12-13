@@ -42,7 +42,9 @@ export default {
       email: null,
       password: null,
       confirmation: false,
-      existe: false
+      existe: false,
+      user: null,
+      token: null
     }
   },
   methods: {
@@ -72,9 +74,9 @@ export default {
           }
         }).then(response => {
         this.ingresar(response.status)
+        this.user = response.user
+        this.token = response.token
         console.log(response.data)
-        console.warn(response.status)
-        console.warn(response.data.token)
       }).catch(e => {
         this.ingresar(e.response.status)
         console.log(e)

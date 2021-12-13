@@ -6,7 +6,6 @@
           <div class="md-title">Post</div>
           <div class="md-subhead">Esto es un comentario embebido</div>
         </md-card-header>
-        
         <md-card-content>
           <md-field>
             <label>Contenido</label>
@@ -23,9 +22,26 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'PostBar',
   methods: {
+    postear: function () {
+      const userlogin = { post: this.textarea }
+      axios.post('http://localhost:8081/home/register',
+        userlogin, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+          }
+        }).then(response => {
+        console.log(response.status)
+        this.crearPost()
+      }).catch(e => {
+        console.log(e)
+      })
+    },
     crearPost: function () {
       this.$emit('PostCreado', this.textarea)
     }
