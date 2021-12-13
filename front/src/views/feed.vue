@@ -52,7 +52,7 @@ import axios from 'axios'
 export default {
   name: 'Home',
   created: function () {
-    console.warn('tester1')
+    console.warn(this.$store.state.sesion.token)
     // getData()
   },
   computed: {

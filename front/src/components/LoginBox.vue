@@ -17,7 +17,7 @@
       <md-input v-model="password"></md-input>
     </md-field>
     <div id = "LoginButtons">
-      <md-button id="registrar" v-on:click="ingresar(200)" style="color:#FFFBF4">
+      <md-button id="registrar" v-on:click="getData()" style="color:#FFFBF4">
         Iniciar Sesion
       </md-button>
       <md-button :to="{name:'Registro'}" id="aceptar"  style="color:#FFFBF4">
@@ -37,6 +37,11 @@ export default {
   beforeDestroy () {
     document.querySelector('body').setAttribute('style', '')
   },
+  computed: {
+    sesion () {
+      return this.$store.state.sesion
+    }
+  },
   data () {
     return {
       email: null,
@@ -53,6 +58,7 @@ export default {
         this.confirmation = false
         this.existe = false
         this.$router.push({ name: 'Feed' })
+        this.$store.state.sesion.token = this.token
       }
       if (rt === 403) {
         this.confirmation = false
@@ -73,10 +79,8 @@ export default {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }).then(response => {
+        this.token = response.data.token
         this.ingresar(response.status)
-        this.user = response.user
-        this.token = response.token
-        console.log(response.data)
       }).catch(e => {
         this.ingresar(e.response.status)
         console.log(e)
