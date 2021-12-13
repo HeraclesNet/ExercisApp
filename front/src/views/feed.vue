@@ -53,7 +53,7 @@ export default {
   name: 'Home',
   created: function () {
     console.warn(this.$store.state.sesion.token)
-    // getData()
+    this.getData()
   },
   computed: {
     sesion () {
@@ -64,29 +64,7 @@ export default {
     return {
       user: null,
       si: 'si',
-      contents: [
-        {
-          id: '12361273',
-          post: 'test1',
-          muscles: 3,
-          files: [
-            {
-              existe: true,
-              url: 'https://www.mydiscprofile.com/_images/homepage-free-personality-test.png'
-            }
-          ]
-        },
-        {
-          id: '0983457',
-          post: 'test2',
-          muscles: 1,
-          files: [
-            {
-              existe: false
-            }
-          ]
-        }
-      ],
+      contents: null,
       postUser: []
     }
   },
@@ -100,15 +78,14 @@ export default {
       this.postUser.push(NewPost)
     },
     getData: function () {
-      const params = new URLSearchParams()
-      params.append()
-      axios.post('http://localhost:8081/login', params,
+      console.warn('Siiuu')
+      axios.get('http://localhost:8081/user/posts',
         {
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            Authorization: 'Bearer ' + this.$store.state.sesion.token
           }
         }).then(response => {
-        this.contents = response.content
+        this.contents = response.data.content
         console.log(response.data)
       }).catch(e => {
         console.log(e)

@@ -14,7 +14,7 @@
         </md-card-content>
 
         <md-card-actions>
-          <md-button v-on:click="crearPost()">Publicar</md-button>
+          <md-button v-on:click="postear()">Publicar</md-button>
         </md-card-actions>
       </md-ripple>
     </md-card>
@@ -25,13 +25,20 @@
 import axios from 'axios'
 export default {
   name: 'PostBar',
+  computed: {
+    sesion () {
+      return this.$store.state.sesion
+    }
+  },
   methods: {
     postear: function () {
-      const userlogin = { post: this.textarea }
-      axios.post('http://localhost:8081/home/register',
-        userlogin, {
+      const userPost = new FormData()
+      userPost.append('content', this.textarea)
+      axios.post('http://localhost:8081/user/media/upload',
+        userPost, {
           headers: {
-            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + this.$store.state.sesion.token,
+            'Content-Type': 'multipart/form-data',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
           }
