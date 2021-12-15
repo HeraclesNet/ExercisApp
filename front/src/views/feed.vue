@@ -26,8 +26,8 @@
           <md-card-header-text>
             <div class="md-title">{{content.post}}</div>
           </md-card-header-text>
-          <md-card-content v-for="file in content.files" :key="file">
-            <md-card-media  v-if="file.existe === true">
+          <md-card-content v-if="content.hasFiles === true">
+            <md-card-media  v-for="file in content.files" :key="file">
               <img :src = "file.url"/>
             </md-card-media>
           </md-card-content>
@@ -78,7 +78,6 @@ export default {
       this.postUser.push(NewPost)
     },
     getData: function () {
-      console.warn('Siiuu')
       axios.get('http://localhost:8081/user/posts',
         {
           headers: {
@@ -86,6 +85,7 @@ export default {
           }
         }).then(response => {
         this.contents = response.data.content
+        console.warn()
         console.log(response.data)
       }).catch(e => {
         console.log(e)
