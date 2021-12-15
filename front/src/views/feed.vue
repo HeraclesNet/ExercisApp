@@ -51,6 +51,12 @@ import Post from '@/Objects/Post.js'
 import axios from 'axios'
 export default {
   name: 'Home',
+  beforeCreate () {
+    document.querySelector('html').setAttribute('style', 'background: #36393e')
+  },
+  beforeDestroy () {
+    document.querySelector('body').setAttribute('style', '')
+  },
   created: function () {
     console.warn(this.$store.state.sesion.token)
     this.getData()
