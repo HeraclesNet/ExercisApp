@@ -7,13 +7,11 @@
     <img src="../assets/Appxercise-04.png" width="250px" alt="Appxercise">
 </picture>
 </a></h3>
-      <md-badge class="md-primary">
         <md-avatar>
           <md-button class="md-icon-button">
             <img src="../assets/Appxercise-04.png">
           </md-button>
         </md-avatar>
-      </md-badge>
      <md-button style="color:#ee2d2b">Salir Cuenta <i class="material-icons" style="vertical-align:middle">logout</i></md-button>
     </md-toolbar>
   </div>

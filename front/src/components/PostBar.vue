@@ -12,8 +12,14 @@
             <md-textarea v-model="textarea" md-counter="80"></md-textarea>
           </md-field>
         </md-card-content>
-
-        <md-card-actions>
+        <md-card-actions md-alignment="space-between">
+          <md-button>
+            <!-- <input type="file" accept="image/*" @change="uploadImage($event)" id="file-input"/> -->
+            <md-field accept="image/*" @change="uploadImage($event)" id="file-input">
+              <label>Subir Imagen</label>
+              <md-file v-model="placeholder" placeholder="Subir Imagen" />
+              </md-field>
+          </md-button>
           <md-button v-on:click="postear()">Publicar</md-button>
         </md-card-actions>
       </md-ripple>
@@ -28,6 +34,11 @@ export default {
   computed: {
     sesion () {
       return this.$store.state.sesion
+    }
+  },
+  data () {
+    return {
+      file: new FormData()
     }
   },
   methods: {
@@ -51,6 +62,25 @@ export default {
     },
     crearPost: function () {
       this.$emit('PostCreado', this.textarea)
+    },
+    uploadImage (event) {
+      const URL = 'http://foobar.com/upload'
+      this.file.append('name', 'my-picture')
+      this.file.append('file', event.target.files[0])
+      const config = {
+        header: {
+          'Content-Type': 'image/png'
+        }
+      }
+      axios.put(
+        URL,
+        this.file,
+        config
+      ).then(
+        response => {
+          console.log('image upload response > ', response)
+        }
+      )
     }
   }
 }

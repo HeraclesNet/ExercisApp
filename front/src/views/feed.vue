@@ -13,7 +13,7 @@
           </md-card-content>
           <md-card-actions>
             <md-button class="md-icon-button">
-              <md-icon>favorite</md-icon>
+              <md-icon>sports_mma</md-icon>
               {{Post.getMuscles()}}
             </md-button>
            </md-card-actions>
