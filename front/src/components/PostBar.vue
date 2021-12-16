@@ -1,6 +1,6 @@
 <template>
   <div class="conf">
-     <md-card md-with-hover>
+    <md-card md-with-hover>
       <md-ripple>
         <md-card-header>
           <div class="md-title">Post</div>
@@ -15,9 +15,9 @@
         <md-card-actions md-alignment="space-between">
           <md-button>
             <!-- <input type="file" accept="image/*" @change="uploadImage($event)" id="file-input"/> -->
-            <md-field accept="image/*" @change="uploadImage($event)" id="file-input">
+            <md-field accept="image/*" id="file-input">
               <label>Subir Imagen</label>
-              <md-file v-model="placeholder" placeholder="Subir Imagen" />
+              <md-file v-model="placeholder" @change="uploadImage($event)" placeholder="Subir Imagen" />
               </md-field>
           </md-button>
           <md-button v-on:click="postear()">Publicar</md-button>
@@ -38,18 +38,18 @@ export default {
   },
   data () {
     return {
-      file: new FormData()
+      userPost: new FormData(),
+      file: ''
     }
   },
   methods: {
     postear: function () {
-      const userPost = new FormData()
-      userPost.append('content', this.textarea)
+      this.userPost.append('content', this.textarea)
       axios.post('http://localhost:8081/user/media/upload',
-        userPost, {
+        this.userPost, {
           headers: {
             Authorization: 'Bearer ' + this.$store.state.sesion.token,
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': `multipart/form-data; boundary=${this.userPost._boundary}`,
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
           }
@@ -64,23 +64,9 @@ export default {
       this.$emit('PostCreado', this.textarea)
     },
     uploadImage (event) {
-      const URL = 'http://foobar.com/upload'
-      this.file.append('name', 'my-picture')
-      this.file.append('file', event.target.files[0])
-      const config = {
-        header: {
-          'Content-Type': 'image/png'
-        }
-      }
-      axios.put(
-        URL,
-        this.file,
-        config
-      ).then(
-        response => {
-          console.log('image upload response > ', response)
-        }
-      )
+      this.file = event.target.files[0]
+      this.userPost.append('file', this.file)
+      console.warn(this.file)
     }
   }
 }

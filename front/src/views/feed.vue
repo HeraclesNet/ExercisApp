@@ -16,7 +16,7 @@
               <md-icon>sports_mma</md-icon>
               {{Post.getMuscles()}}
             </md-button>
-           </md-card-actions>
+          </md-card-actions>
         </md-ripple>
       </md-card>
     </div>
