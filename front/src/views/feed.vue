@@ -6,7 +6,7 @@
     <div id="card" v-for="Post in postUser" :key="Post.id">
       <md-card md-with-hover>
         <md-ripple>
-          <md-card-header-text>
+          <md-card-header-text v-if="Post.getEscrito() !== null">
             <div class="md-title">{{Post.getEscrito()}}</div>
           </md-card-header-text>
           <md-card-content v-if="Post.Multimedias.getExiste() === true">
@@ -23,7 +23,7 @@
     <div id="card" v-for="content in contents" :key="content.id">
       <md-card md-with-hover>
         <md-ripple>
-          <md-card-header-text>
+          <md-card-header-text v-if="content.post !== null">
             <div class="md-title">{{content.post}}</div>
           </md-card-header-text>
           <md-card-content v-if="content.hasFiles === true">
@@ -34,7 +34,7 @@
           <md-card-actions>
             <md-button class="md-icon-button">
               {{content.muscles}}
-              <md-icon>favorite</md-icon>
+              <md-icon>sports_mma</md-icon>
             </md-button>
           </md-card-actions>
       </md-ripple>
