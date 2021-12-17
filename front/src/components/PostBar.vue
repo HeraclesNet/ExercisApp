@@ -20,7 +20,7 @@
               <md-file v-model="placeholder" @change="uploadImage($event)" placeholder="Subir Imagen" />
               </md-field>
           </md-button>
-          <md-button v-on:click="postear()">Publicar</md-button>
+          <md-button v-on:click="postear();forceRerender()" key="componentKey">Publicar</md-button>
         </md-card-actions>
       </md-ripple>
     </md-card>
@@ -40,8 +40,8 @@ export default {
   data () {
     return {
       userPost: new FormData(),
-      file: '',
-      url: ''
+      componentKey: 0,
+      file: ''
     }
   },
   methods: {
@@ -74,6 +74,10 @@ export default {
     uploadImage (event) {
       this.file = event.target.files[0]
       this.userPost.append('file', this.file)
+      console.warn(this.file)
+    },
+    forceRerender() {
+      this.componentKey += 1;
     }
   }
 }
