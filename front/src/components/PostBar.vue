@@ -29,6 +29,7 @@
 
 <script>
 import axios from 'axios'
+import Post from '@/Objects/Post.js'
 export default {
   name: 'PostBar',
   computed: {
@@ -39,7 +40,8 @@ export default {
   data () {
     return {
       userPost: new FormData(),
-      file: ''
+      file: '',
+      url: ''
     }
   },
   methods: {
@@ -55,18 +57,23 @@ export default {
           }
         }).then(response => {
         console.log(response.status)
+        this.url = response.data.message
         this.crearPost()
       }).catch(e => {
         console.log(e)
       })
     },
     crearPost: function () {
-      this.$emit('PostCreado', this.textarea)
+      var existe = true
+      if (this.url === 'OnlyText') {
+        existe = false
+      }
+      const post = new Post('1', 'pepito', this.textarea, existe, this.url)
+      this.$emit('PostCreado', post)
     },
     uploadImage (event) {
       this.file = event.target.files[0]
       this.userPost.append('file', this.file)
-      console.warn(this.file)
     }
   }
 }

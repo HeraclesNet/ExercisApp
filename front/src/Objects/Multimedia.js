@@ -5,8 +5,7 @@ export default class Post {
     Tipo = null;
     Size = null;
 
-    constructor (existe) {
-      this.Existe = existe
+    constructor () {
     }
 
     getExiste () {

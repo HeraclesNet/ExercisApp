@@ -9,7 +9,8 @@
           <md-card-header-text v-if="Post.getEscrito() !== null">
             <div class="md-title">{{Post.getEscrito()}}</div>
           </md-card-header-text>
-          <md-card-content v-if="Post.Multimedias.getExiste() === true">
+          <md-card-content v-if="Post.getExiste() === true">
+            <img :src = "Post.getUrl()"/>
           </md-card-content>
           <md-card-actions>
             <md-button class="md-icon-button">
@@ -47,7 +48,6 @@
 <script>
 import NavBarHome from '@/components/NavBarHome.vue'
 import PostBar from '@/components/PostBar.vue'
-import Post from '@/Objects/Post.js'
 import axios from 'axios'
 export default {
   name: 'Home',
@@ -80,8 +80,7 @@ export default {
   },
   methods: {
     postear: function (postCreado) {
-      const NewPost = new Post(1, 'Usuario1', postCreado, false)
-      this.postUser.push(NewPost)
+      this.postUser.push(postCreado)
     },
     getData: function () {
       axios.get('http://localhost:8081/user/posts',
