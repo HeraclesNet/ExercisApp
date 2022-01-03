@@ -76,8 +76,8 @@ export default {
       this.userPost.append('file', this.file)
       console.warn(this.file)
     },
-    forceRerender() {
-      this.componentKey += 1;
+    forceRerender () {
+      this.componentKey += 1
     }
   }
 }
