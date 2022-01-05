@@ -6,16 +6,18 @@ export default class Post {
     Existe = null;
     Id = null;
     Url = null;
+    UploadDate = null;
 
-    constructor (id, user, escrito, existe, url) {
+    constructor (id, user, escrito, existe, url, date) {
       this.Url = url
       this.Usuario = user
       this.Escrito = escrito
       this.Id = id
       this.Existe = existe
+      this.UploadDate = date
     }
 
-    getUsuario () {
+    getUser () {
       return this.Usuario
     }
 
@@ -33,6 +35,10 @@ export default class Post {
 
     getFiles () {
       return this.Files
+    }
+
+    getDate () {
+      return this.UploadDate
     }
 
     setEscrito (escrito) {
@@ -58,4 +64,6 @@ export default class Post {
     getExiste () {
       return this.Existe
     }
+
+
 }

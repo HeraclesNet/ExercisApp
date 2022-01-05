@@ -40,19 +40,33 @@
 import axios from 'axios'
 export default {
   name: 'LoginBox',
+  computed: {
+    sesion () {
+      return this.$store.state.sesion
+    }
+  },
   data () {
     return {
       email: null,
       password: null,
       name: null,
       nickName: null,
-      dateOfBirth: null
+      dateOfBirth: null,
+      token: null
     }
   },
   methods: {
+    guardarInfo: function () {
+      this.$store.state.sesion.token = this.token
+      this.$store.state.sesion.email = this.email
+      this.$store.state.sesion.name = this.token
+      this.$store.state.sesion.nickName = this.token
+      this.$store.state.sesion.dateOfBirth = this.dateOfBirth
+    },
     crear: function (rt) {
       if (rt === 201) {
         this.$emit('aceptar', this.name)
+        this.guardarInfo()
       } else {
         if (rt === 404) {
           return false

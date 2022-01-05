@@ -48,17 +48,27 @@ export default {
       password: null,
       confirmation: false,
       existe: false,
-      user: null,
-      token: null
+      token: null,
+      name: null,
+      nickName: null,
+      dateOfBirth: null
     }
   },
   methods: {
+    guardarInfo: function () {
+      this.$store.state.sesion.token = this.token
+      this.$store.state.sesion.email = this.email
+      this.$store.state.sesion.name = this.token
+      this.$store.state.sesion.nickName = this.token
+      this.$store.state.sesion.dateOfBirth = this.dateOfBirth
+    },
     ingresar: function (rt) {
       if (rt === 200) {
         this.confirmation = false
         this.existe = false
         this.$router.push({ name: 'Feed' })
         this.$store.state.sesion.token = this.token
+        // guardarInfo()
       }
       if (rt === 403) {
         this.confirmation = false
@@ -80,6 +90,7 @@ export default {
           }
         }).then(response => {
         this.token = response.data.token
+        // Falta que retornen la info necesaria
         this.ingresar(response.status)
       }).catch(e => {
         this.ingresar(e.response.status)

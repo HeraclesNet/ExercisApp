@@ -20,7 +20,7 @@
               <md-file v-model="placeholder" @change="uploadImage($event)" placeholder="Subir Imagen" />
               </md-field>
           </md-button>
-          <md-button v-on:click="postear();forceRerender()" key="componentKey">Publicar</md-button>
+          <md-button v-on:click="postear()" key="componentKey">Publicar</md-button>
         </md-card-actions>
       </md-ripple>
     </md-card>
@@ -41,7 +41,8 @@ export default {
     return {
       userPost: new FormData(),
       componentKey: 0,
-      file: ''
+      file: '',
+      id: 1
     }
   },
   methods: {
@@ -58,6 +59,8 @@ export default {
         }).then(response => {
         console.log(response.status)
         this.url = response.data.message
+        // this.url = response.data.message.url
+        // this.id = response.data.message.id
         this.crearPost()
       }).catch(e => {
         console.log(e)
@@ -67,14 +70,17 @@ export default {
       var existe = true
       if (this.url === 'OnlyText') {
         existe = false
-      }
-      const post = new Post('1', 'pepito', this.textarea, existe, this.url)
+      }  
+      var today = new Date()
+      var date = today.getFullYear() + '-' + (today.getMonth()+1)+'-'+today.getDate()
+      var time = today.getHours() + ':' + today.getMinutes() + ":" + today.getSeconds()
+      var dateTime = date + ' ' + time
+      const post = new Post(this.id, 'pepito', this.textarea, existe, this.url, dateTime)
       this.$emit('PostCreado', post)
     },
     uploadImage (event) {
       this.file = event.target.files[0]
       this.userPost.append('file', this.file)
-      console.warn(this.file)
     },
     forceRerender () {
       this.componentKey += 1
