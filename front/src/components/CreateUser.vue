@@ -85,6 +85,7 @@ export default {
         }).then(response => {
         console.log(response.status)
         this.crear(response.status)
+        this.token = response.data.token
       }).catch(e => {
         console.log(e)
       })

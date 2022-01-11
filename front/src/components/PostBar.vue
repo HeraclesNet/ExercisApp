@@ -59,7 +59,6 @@ export default {
         }).then(response => {
         console.log(response.status)
         this.url = response.data.message
-        // this.url = response.data.message.url
         // this.id = response.data.message.id
         this.crearPost()
       }).catch(e => {
@@ -70,12 +69,8 @@ export default {
       var existe = true
       if (this.url === 'OnlyText') {
         existe = false
-      }  
-      var today = new Date()
-      var date = today.getFullYear() + '-' + (today.getMonth()+1)+'-'+today.getDate()
-      var time = today.getHours() + ':' + today.getMinutes() + ":" + today.getSeconds()
-      var dateTime = date + ' ' + time
-      const post = new Post(this.id, 'pepito', this.textarea, existe, this.url, dateTime)
+      }
+      const post = new Post(this.id, this.$store.state.sesion.name, this.textarea, existe, this.url)
       this.$emit('PostCreado', post)
     },
     uploadImage (event) {

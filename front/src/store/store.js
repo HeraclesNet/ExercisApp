@@ -10,7 +10,11 @@ export const store = new Vuex.Store({
       name: null,
       dateOfBirth: null,
       nickName: null,
-      token: null
+      gender: null,
+      weight: null,
+      height: null,
+      token: null,
+      refreshtoken: null
     }
   }
 })

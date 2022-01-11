@@ -48,27 +48,36 @@ export default {
       password: null,
       confirmation: false,
       existe: false,
+      // info usuario
+      realemail: null,
       token: null,
       name: null,
       nickName: null,
-      dateOfBirth: null
+      visibilidad: null,
+      dateOfBirth: null,
+      gender: null,
+      weight: null,
+      height: null
     }
   },
   methods: {
     guardarInfo: function () {
       this.$store.state.sesion.token = this.token
-      this.$store.state.sesion.email = this.email
+      this.$store.state.sesion.email = this.realemail
       this.$store.state.sesion.name = this.token
       this.$store.state.sesion.nickName = this.token
       this.$store.state.sesion.dateOfBirth = this.dateOfBirth
+      this.$store.state.sesion.weight = this.weight
+      this.$store.state.sesion.height = this.height
+      this.$store.state.sesion.gender = this.gender
     },
     ingresar: function (rt) {
       if (rt === 200) {
         this.confirmation = false
         this.existe = false
         this.$router.push({ name: 'Feed' })
-        this.$store.state.sesion.token = this.token
-        // guardarInfo()
+        this.realemail = this.email
+        this.guardarInfo()
       }
       if (rt === 403) {
         this.confirmation = false
@@ -90,7 +99,12 @@ export default {
           }
         }).then(response => {
         this.token = response.data.token
-        // Falta que retornen la info necesaria
+        this.name = response.data.user.name
+        this.nickName = response.data.user.nickName
+        this.dateOfBirth = response.data.user.dateOfBirth
+        this.weight = response.data.user.weight
+        this.gender = response.data.user.gender
+        this.height = response.data.user.height
         this.ingresar(response.status)
       }).catch(e => {
         this.ingresar(e.response.status)

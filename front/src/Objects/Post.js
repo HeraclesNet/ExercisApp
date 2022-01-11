@@ -7,14 +7,18 @@ export default class Post {
     Id = null;
     Url = null;
     UploadDate = null;
+    Liked = null;
+    MediaType = null;
+    NickName = null;
+    // bool que determina el like
+    // nickname
 
-    constructor (id, user, escrito, existe, url, date) {
+    constructor (id, user, escrito, existe, url) {
       this.Url = url
       this.Usuario = user
       this.Escrito = escrito
       this.Id = id
       this.Existe = existe
-      this.UploadDate = date
     }
 
     getUser () {
@@ -57,6 +61,18 @@ export default class Post {
       this.Url = content
     }
 
+    setMediaType (mediatype) {
+      this.MediaType = mediatype
+    }
+
+    setLiked (liked) {
+      this.Liked = liked
+    }
+
+    setNickName (nickname) {
+      this.NickName = nickname
+    }
+
     getUrl () {
       return this.Url
     }
@@ -64,6 +80,4 @@ export default class Post {
     getExiste () {
       return this.Existe
     }
-
-
 }

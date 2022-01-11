@@ -27,14 +27,14 @@ export default {
   name: 'Post',
   props: {
     Post: Object
-    // user: String
   },
   data () {
     return {
-      liked: false
+      liked: this.Post.getLiked()
     }
   },
   methods: {
+    // metodo para ir al otro perfil
     like: function () {
       this.liked = true
       console.warn(this.liked)
@@ -49,6 +49,7 @@ export default {
     },
     postlike: function () {
       const params = new URLSearchParams()
+      // +1 ,idpost
       axios.post('http://localhost:8081/login', params,
         {
           headers: {
@@ -61,6 +62,7 @@ export default {
     },
     postdislike: function () {
       const params = new URLSearchParams()
+      // -1 ,idpost
       axios.post('http://localhost:8081/login', params,
         {
           headers: {
@@ -70,6 +72,8 @@ export default {
       }).catch(e => {
         console.log(e)
       })
+    },
+    gotoProfile: function () {
     }
   }
 }
