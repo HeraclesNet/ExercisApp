@@ -12,17 +12,17 @@
     <ul>
       <li is="Post" v-for="Posts in postUser" v-bind:Post= "Posts" v-bind:key="Posts.id"></li>
     </ul>
-    <div v-if="filtro === nuevo">
+    <div v-if="filtro === 'nuevo'">
       <ul>
         <li is="Post" v-for="content in contents" v-bind:Post= "content" v-bind:key="content.id"></li>
       </ul>
     </div>
-    <div v-if="filtro === destacado">
+    <div v-if="filtro === 'destacado'">
       <ul>
         <li is="Post" v-for="content in contents" v-bind:Post= "content" v-bind:key="content.id"></li>
       </ul>
     </div>
-    <div v-if="filtro === votos">
+    <div v-if="filtro === 'votos'">
       <ul>
         <li is="Post" v-for="content in contents" v-bind:Post= "content" v-bind:key="content.id"></li>
       </ul>
@@ -40,10 +40,12 @@ export default {
   name: 'Home',
   beforeCreate () {
     document.querySelector('html').setAttribute('style', 'background: #36393e')
-    this.getDataDestacados()
   },
   beforeDestroy () {
     document.querySelector('body').setAttribute('style', '')
+  },
+  Created () {
+    this.getDataDestacados()
   },
   computed: {
     sesion () {

@@ -28,7 +28,7 @@ import Post from '@/components/Post.vue'
 import axios from 'axios'
 export default {
   name: 'User',
-  beforeCreate () {
+  Created () {
     this.getPosts()
   },
   data () {
@@ -68,7 +68,7 @@ export default {
       }
       this.contents = temp
     },
-    getPosts: function (){
+    getPosts: function () {
       axios.get('http://localhost:8081/user/posts',
         {
           headers: {

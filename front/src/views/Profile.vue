@@ -15,9 +15,10 @@
 <script>
 import NavBarHome from '@/components/NavBarHome.vue'
 import Post from '@/components/Post.vue'
+import axios from 'axios'
 export default {
   name: 'Profile',
-  beforeCreate () {
+  Created () {
     this.getData()
   },
   props: {
@@ -40,18 +41,15 @@ export default {
     Post
   },
   methods: {
-    seguir: function (){
+    seguir: function () {
+    // se envia el nickname con el token
+    },
+    postSeguir: function () {
+    },
+    noSeguir: function () {
       // se envia el nickname con el token
-      
     },
-    postSeguir: function (){
-
-    },
-    noSeguir: function (){
-      // se envia el nickname con el token
-      
-    },
-    postNoSeguir: function (){
+    postNoSeguir: function () {
 
     },
     transformarContenido: function (contenido) {
@@ -66,7 +64,7 @@ export default {
       }
       this.contents = temp
     },
-    getdata: function (){
+    getdata: function () {
       // con el nickname
       axios.get('http://localhost:8081/user/posts',
         {

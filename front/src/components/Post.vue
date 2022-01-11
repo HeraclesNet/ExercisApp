@@ -37,13 +37,11 @@ export default {
     // metodo para ir al otro perfil
     like: function () {
       this.liked = true
-      console.warn(this.liked)
       const tempmuscles = this.Post.getMuscles()
       this.Post.setMuscles(tempmuscles + 1)
     },
     dislike: function () {
       this.liked = false
-      console.warn(this.liked)
       const tempmuscles = this.Post.getMuscles()
       this.Post.setMuscles(tempmuscles - 1)
     },

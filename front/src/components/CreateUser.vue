@@ -26,7 +26,7 @@
       <md-input v-model="password"></md-input>
     </md-field>
     <div id = "RegisterButtons">
-      <md-button id="Create" v-on:click="getData()" style="color:#FFFBF4">
+      <md-button id="Create" v-on:click="crear(201)" style="color:#FFFBF4">
         Crear Cuenta
       </md-button>
       <md-button :to="{name:'Inicio'}" id="aceptar"  style="color:#FFFBF4">
@@ -59,8 +59,8 @@ export default {
     guardarInfo: function () {
       this.$store.state.sesion.token = this.token
       this.$store.state.sesion.email = this.email
-      this.$store.state.sesion.name = this.token
-      this.$store.state.sesion.nickName = this.token
+      this.$store.state.sesion.name = this.name
+      this.$store.state.sesion.nickName = this.nickName
       this.$store.state.sesion.dateOfBirth = this.dateOfBirth
     },
     crear: function (rt) {

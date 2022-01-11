@@ -12,7 +12,9 @@
             <img src="../assets/Appxercise-04.png">
           </md-button>
         </md-avatar>
-     <md-button style="color:#ee2d2b">Salir Cuenta <i class="material-icons" style="vertical-align:middle">logout</i></md-button>
+        <!-- Faltan las opciones -->
+      <md-button :to="{name:'User'}" style="color:#ee2d2b">Usuario </md-button>
+      <md-button style="color:#ee2d2b">Salir Cuenta <i class="material-icons" style="vertical-align:middle">logout</i></md-button>
     </md-toolbar>
   </div>
 </template>

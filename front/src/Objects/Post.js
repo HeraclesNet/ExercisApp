@@ -80,4 +80,16 @@ export default class Post {
     getExiste () {
       return this.Existe
     }
+
+    getLiked () {
+      return this.Liked
+    }
+
+    getNickname () {
+      return this.NickName
+    }
+
+    getMediaType () {
+      return this.MediaType
+    }
 }

@@ -20,7 +20,7 @@
               <md-file v-model="placeholder" @change="uploadImage($event)" placeholder="Subir Imagen" />
               </md-field>
           </md-button>
-          <md-button v-on:click="postear()" key="componentKey">Publicar</md-button>
+          <md-button v-on:click="crearPost()" key="componentKey">Publicar</md-button>
         </md-card-actions>
       </md-ripple>
     </md-card>
@@ -66,11 +66,12 @@ export default {
       })
     },
     crearPost: function () {
-      var existe = true
+      var existe = false
       if (this.url === 'OnlyText') {
         existe = false
       }
       const post = new Post(this.id, this.$store.state.sesion.name, this.textarea, existe, this.url)
+      console.log(this.$store.state.sesion.name)
       this.$emit('PostCreado', post)
     },
     uploadImage (event) {

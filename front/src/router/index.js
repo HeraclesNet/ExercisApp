@@ -21,18 +21,23 @@ const routes = [
   {
     path: '/exercise',
     name: 'Feed',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/feed.vue')
+    component: () => import('../views/feed.vue')
   },
   {
     path: '/inicio',
     name: 'Inicio',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Inicio.vue')
+    component: () => import('../views/Inicio.vue')
+  },
+  // Estos Nombres deberan ser dinamicos
+  {
+    path: '/Usuario',
+    name: 'User',
+    component: () => import('../views/User.vue')
+  },
+  {
+    path: '/Profile',
+    name: 'Profile',
+    component: () => import('../views/Profile.vue')
   }
 ]
 
