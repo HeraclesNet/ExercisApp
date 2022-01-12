@@ -87,12 +87,15 @@ export default {
 
 <style>
 .conf {
-  text-align: center
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
 }
 .md-card {
   width: 520px;
   margin: 4px;
-  display: inline-block;
   vertical-align: top;
 }
 </style>

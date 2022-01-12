@@ -23,7 +23,6 @@ export default {
 <style>
 .container{
   font-family: 'TTOctosquares-Regular Regular';
-  color: #fff;
   font-size: 30px
 }
 </style>

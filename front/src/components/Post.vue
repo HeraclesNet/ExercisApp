@@ -2,8 +2,8 @@
 <md-card md-with-hover>
         <md-ripple>
           <md-card-header-text v-if="Post.getEscrito() !== null">
-            <div class="md-title">{{Post.getEscrito()}}</div>
-            <div class="md-subhead">{{Post.getUser()}}</div>
+            <div class="md-subhead">{{Post.getEscrito()}}</div>
+            <!-- <div class="md-subhead">{{Post.getUser()}}</div> -->
           </md-card-header-text>
           <md-card-content v-if="Post.getExiste() === true">
             <img :src = "Post.getUrl()"/>

@@ -1,30 +1,33 @@
 <template>
   <div class="feed" v-on:="">
   <NavBarHome/>
-  <PostBar v-on:PostCreado="postear($event)"/>
-  <!-- Filtro -->
+  <!-- Filtros -->
   <div id="filtros">
-    <md-button v-on:click="changeFiltro('votos')">Mas Gustados</md-button>
-    <md-button v-on:click="changeFiltro('nuevo')">Mas Nuevos</md-button>
-    <md-button v-on:click="changeFiltro('destacado')">Destacados</md-button>
+    <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeFiltro('votos')">Mas Gustados</md-button>
+    <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeFiltro('nuevo')">Mas Nuevos</md-button>
+    <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeFiltro('destacado')">Destacados</md-button>
   </div>
+  <PostBar v-on:PostCreado="postear($event)"/>
   <div id="content">
-    <ul>
-      <li is="Post" v-for="Posts in postUser" v-bind:Post= "Posts" v-bind:key="Posts.id"></li>
+    <ul style="padding-left: 0px;">
+      <li id="card" is="Post" v-for="Posts in postUser" v-bind:Post= "Posts" v-bind:key="Posts.id"></li>
     </ul>
+    <div class="break"></div>
     <div v-if="filtro === 'nuevo'">
-      <ul>
-        <li is="Post" v-for="content in contents" v-bind:Post= "content" v-bind:key="content.id"></li>
+      <ul style="padding-left: 0px;">
+        <li id="card" is="Post" v-for="content in contents" v-bind:Post= "content" v-bind:key="content.id"></li>
       </ul>
     </div>
+    <div class="break"></div>
     <div v-if="filtro === 'destacado'">
-      <ul>
-        <li is="Post" v-for="content in contents" v-bind:Post= "content" v-bind:key="content.id"></li>
+      <ul style="padding-left: 0px;">
+        <li id="card" is="Post" v-for="content in contents" v-bind:Post= "content" v-bind:key="content.id"></li>
       </ul>
     </div>
+    <div class="break"></div>
     <div v-if="filtro === 'votos'">
-      <ul>
-        <li is="Post" v-for="content in contents" v-bind:Post= "content" v-bind:key="content.id"></li>
+      <ul style="padding-left: 0px;">
+        <li id="card" is="Post" v-for="content in contents" v-bind:Post= "content" v-bind:key="content.id"></li>
       </ul>
     </div>
     <div class="break"></div>
@@ -142,20 +145,26 @@ export default {
 <style>
 .feed {
   font-family: 'TTOctosquares-Regular Regular';
-  color: #fff;
   font-size: 30px;
   }
-#comment{
-  display: block;
-  flex-flow: wrap
+#content{
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+  align-content: center;
+}
+#content.ul{
+  padding-left: 0;
 }
 #card {
-  margin: 4px;
   display: flex;
   justify-content: center;
 }
 .break {
   flex-basis: 100%;
   height: 0;
+}
+#filtros{
+  margin-left: 10px;
 }
 </style>
