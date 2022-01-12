@@ -6,7 +6,7 @@
     <div id="warning" v-if="existe">
       <p>USUARIO NO EXISTE</p>
     </div>
-    <md-field>
+    <md-field md-clearable>
       <md-icon>account_circle</md-icon>
       <label>Usuario</label>
       <md-input v-model="email"></md-input>
@@ -14,7 +14,7 @@
     <md-field>
       <md-icon>password</md-icon>
       <label>Contraseña</label>
-      <md-input v-model="password"></md-input>
+      <md-input v-model="password" type="password"></md-input>
     </md-field>
     <div id = "LoginButtons">
       <md-button id="registrar" v-on:click="ingresar(200)" style="color:#FFFBF4">

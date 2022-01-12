@@ -23,7 +23,7 @@
     <md-field>
       <md-icon>password</md-icon>
       <label>Contraseña</label>
-      <md-input v-model="password"></md-input>
+      <md-input v-model="password" type="password"></md-input>
     </md-field>
     <div id = "RegisterButtons">
       <md-button id="Create" v-on:click="crear(201)" style="color:#FFFBF4">

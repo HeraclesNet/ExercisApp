@@ -1,6 +1,5 @@
 <template>
-
-  <div class="registro">
+<div class="registro">
     <NavBarInit/>
     <div id = "logo">
       <!-- <img src="..\assets\Appxercise-02.png"> -->
