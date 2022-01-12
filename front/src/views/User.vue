@@ -1,6 +1,7 @@
 <template>
   <div class="user">
   <NavBarHome/>
+  <!-- quitar postbar -->
   <PostBar v-on:PostCreado="postear($event)"/>
   <!-- Info Usuario -->
   <div id="InfoUser">

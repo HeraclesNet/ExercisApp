@@ -79,6 +79,7 @@ export default {
       this.userPost.append('file', this.file)
     },
     forceRerender () {
+      // volver A implementar esta mamada
       this.componentKey += 1
     }
   }
