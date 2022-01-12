@@ -13,6 +13,7 @@
           </md-button>
         </md-avatar>
         <!-- Faltan las opciones -->
+      <md-button :to="{name:'Profile'}" style="color:#ee2d2b">Perfil </md-button>
       <md-button :to="{name:'User'}" style="color:#ee2d2b">Usuario </md-button>
       <md-button style="color:#ee2d2b">Salir Cuenta <i class="material-icons" style="vertical-align:middle">logout</i></md-button>
     </md-toolbar>
