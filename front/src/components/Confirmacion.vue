@@ -1,8 +1,19 @@
 <template>
-<!-- Cambiar estilos -->
-  <div class="Welcome">
-    <h1>Bienvenidos a Appxercise</h1>
-    <p>Su Cuenta Ha Sido Creada</p>
-    <md-button :to="{name:'Feed'}" style="color:#FFFBF4"> Ingresar </md-button>
- </div>
+<div id="confirmation">
+  <md-empty-state
+      class="md-primary"
+      md-icon="done"
+      md-label="Felicitaciones"
+      md-description="Su cuenta ha sido creada apropiadamente">
+    </md-empty-state>
+    <md-button id="perfil" class="md-accent" :to="{name:'Profile'}">Ir al Perfil</md-button>
+</div>
 </template>
+<style>
+#perfil {
+  display: flex;
+  background-color: #fff;
+  justify-content: center;
+  width: 10%;
+}
+</style>

@@ -5,11 +5,9 @@
       <label>Nombre de Usuario</label>
       <md-input v-model="name"></md-input>
     </md-field>
-    <md-field>
-      <md-icon>date_range</md-icon>
-      <label>Fecha de nacimiento</label>
-      <md-input v-model="dateOfBirth"></md-input>
-    </md-field>
+    <md-datepicker v-model="selectedDate">
+      <label>Fecha de Nacimiento</label>
+    </md-datepicker>
     <md-field>
       <md-icon>face</md-icon>
       <label>Sobrenombre</label>
