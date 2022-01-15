@@ -1,10 +1,47 @@
 <template>
   <div class="profile">
     <NavBarHome/>
-    <div>
+   <div id="profile">
+     <md-card id="avatar">
+       <md-card-header>
+          <div class="md-title">Imagen</div>
+       </md-card-header>
+      <md-card-media>
+        <img src="../assets/avatar_default-01.png" alt="Usuario">
+      </md-card-media>
+    </md-card>
+    <md-card id="profile-data">
+      <md-card-header>
+        <div class="md-title">Perfil</div>
+      </md-card-header>
+      <md-card-content>
+        <md-field>
+          <label>Nombre</label>
+          <md-input v-model="disabled" disabled></md-input>
+        </md-field>
+        <md-field>
+          <label>Fecha de Nacimiento</label>
+          <md-input v-model="disabled" disabled></md-input>
+        </md-field>
+        <md-field>
+          <label>Dato1</label>
+          <md-input v-model="disabled" disabled></md-input>
+        </md-field>
+        <md-field>
+          <label>Dato2</label>
+          <md-input v-model="disabled" disabled></md-input>
+        </md-field>
+      </md-card-content>
+      <md-card-actions>
+        <md-button>Editar Perfil</md-button>
+        <md-button style="color:#fff;background-color:#ee2d2b">Eliminar Cuenta</md-button>
+      </md-card-actions>
+    </md-card>
+   </div>
+    <!-- <div>
       <md-button :to="{name:'Feed'}" style="color:#FFFBF4"> volver </md-button>
       <md-button style="color:#FFFBF4" v-on:click="seguir()"> seguir </md-button>
-    </div>
+    </div> -->
     <div id="userPost">
       <ul>
         <li is="Post" v-for="Posts in userPost" v-bind:Post= "Posts" v-bind:key="Posts.id"></li>
@@ -87,3 +124,21 @@ export default {
   }
 }
 </script>
+<style>
+#profile{
+  font-family: 'TTOctosquares-Regular Regular';
+  display: flex;
+  align-content: space-around;
+  flex-flow: wrap;
+  margin: 20px;
+}
+#avatar{
+  font-family: 'TTOctosquares-Regular Regular';
+  margin: 15px;
+}
+#profile-data{
+  font-family: 'TTOctosquares-Regular Regular';
+  margin: 15px;
+  width: 50%;
+}
+</style>
