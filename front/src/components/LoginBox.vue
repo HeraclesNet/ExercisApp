@@ -17,7 +17,7 @@
       <md-input v-model="password" type="password"></md-input>
     </md-field>
     <div id = "LoginButtons">
-      <md-button id="registrar" v-on:click="ingresar(200)" style="color:#FFFBF4">
+      <md-button id="registrar" v-on:click="getData()" style="color:#FFFBF4">
         Iniciar Sesion
       </md-button>
       <md-button :to="{name:'Registro'}" id="aceptar"  style="color:#FFFBF4">
@@ -64,8 +64,8 @@ export default {
     guardarInfo: function () {
       this.$store.state.sesion.token = this.token
       this.$store.state.sesion.email = this.realemail
-      this.$store.state.sesion.name = this.token
-      this.$store.state.sesion.nickName = this.token
+      this.$store.state.sesion.name = this.name
+      this.$store.state.sesion.nickName = this.nickName
       this.$store.state.sesion.dateOfBirth = this.dateOfBirth
       this.$store.state.sesion.weight = this.weight
       this.$store.state.sesion.height = this.height

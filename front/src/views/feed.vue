@@ -91,8 +91,12 @@ export default {
             Authorization: 'Bearer ' + this.$store.state.sesion.token
           }
         }).then(response => {
-        this.transformarContenido(response.data.content)
-        console.log(response.data)
+        if (response.status !== 200) {
+          alert('Error en la petición. Intente nuevamente')
+        } else {
+          this.transformarContenido(response.data.content)
+          console.log(response.data)
+        }
       }).catch(e => {
         console.log(e)
       })
@@ -104,8 +108,12 @@ export default {
             Authorization: 'Bearer ' + this.$store.state.sesion.token
           }
         }).then(response => {
-        this.transformarContenido(response.data.content)
-        console.log(response.data)
+        if (response.status !== 200) {
+          alert('Error en la petición. Intente nuevamente')
+        } else {
+          this.transformarContenido(response.data.content)
+          console.log(response.data)
+        }
       }).catch(e => {
         console.log(e)
       })
@@ -117,8 +125,12 @@ export default {
             Authorization: 'Bearer ' + this.$store.state.sesion.token
           }
         }).then(response => {
-        this.transformarContenido(response.data.content)
-        console.log(response.data)
+        if (response.status !== 200) {
+          alert('Error en la petición. Intente nuevamente')
+        } else {
+          this.transformarContenido(response.data.content)
+          console.log(response.data)
+        }
       }).catch(e => {
         console.log(e)
       })

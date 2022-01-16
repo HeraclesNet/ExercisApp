@@ -20,7 +20,7 @@
               <md-file v-model="placeholder" @change="uploadImage($event)" placeholder="Subir Imagen" />
               </md-field>
           </md-button>
-          <md-button v-on:click="crearPost()" key="componentKey">Publicar</md-button>
+          <md-button v-on:click="postear()" key="componentKey">Publicar</md-button>
         </md-card-actions>
       </md-ripple>
     </md-card>
@@ -57,6 +57,10 @@ export default {
             'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
           }
         }).then(response => {
+        if (response.status !== 200) {
+          alert('Error en la petición. Intente nuevamente')
+        } else {
+        }
         console.log(response.status)
         this.url = response.data.message
         // this.id = response.data.message.id

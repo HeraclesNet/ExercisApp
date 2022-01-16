@@ -3,7 +3,7 @@
         <md-ripple>
           <md-card-header-text v-if="Post.getEscrito() !== null">
             <div class="md-subhead">{{Post.getEscrito()}}</div>
-            <!-- <div class="md-subhead">{{Post.getUser()}}</div> -->
+            <div class="md-subhead"> <router-link  :to="{name:'Profile', params:{nickName: this.Post.getNickName()}}">{{Post.getUser()}}</router-link> </div>
           </md-card-header-text>
           <md-card-content v-if="Post.getExiste() === true">
             <img :src = "Post.getUrl()"/>
@@ -34,7 +34,6 @@ export default {
     }
   },
   methods: {
-    // metodo para ir al otro perfil
     like: function () {
       this.liked = true
       const tempmuscles = this.Post.getMuscles()
@@ -47,26 +46,36 @@ export default {
     },
     postlike: function () {
       const params = new URLSearchParams()
-      // +1 ,idpost
+      params.append('id', this.Post.getId())
+      params.append('like', '1')
       axios.post('http://localhost:8081/login', params,
         {
           headers: {
           }
         }).then(response => {
-        this.like()
+        if (response.status !== 200) {
+          alert('Error en la petición. Intente nuevamente')
+        } else {
+          this.like()
+        }
       }).catch(e => {
         console.log(e)
       })
     },
     postdislike: function () {
       const params = new URLSearchParams()
-      // -1 ,idpost
+      params.append('id', this.Post.getId())
+      params.append('like', '-1')
       axios.post('http://localhost:8081/login', params,
         {
           headers: {
           }
         }).then(response => {
-        this.dislike()
+        if (response.status !== 200) {
+          alert('Error en la petición. Intente nuevamente')
+        } else {
+          this.dislike()
+        }
       }).catch(e => {
         console.log(e)
       })
