@@ -76,7 +76,7 @@ export default {
   // metodo para Paginacion
   methods: {
     postear: function (postCreado) {
-      this.postUser.push(postCreado)
+      this.postUser.unshift(postCreado)
     },
     transformarContenido: function (contenido) {
       var temp = []
@@ -89,7 +89,7 @@ export default {
         posts.setMuscles(contenido[i].muscles)
         posts.setNickName(contenido[i].user.nickName)
         posts.setLiked(contenido[i].muscle)
-        temp.push(posts)
+        temp.unshift(posts)
       }
       this.contents = temp
     },
