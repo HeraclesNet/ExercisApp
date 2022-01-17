@@ -6,7 +6,7 @@
       md-label="Felicitaciones"
       md-description="Su cuenta ha sido creada apropiadamente">
     </md-empty-state>
-    <md-button id="perfil" class="md-accent" :to="{name:'Profile'}">Ir al Perfil</md-button>
+    <md-button id="perfil" class="md-accent" :to="{name:'User'}">Ir al Perfil</md-button>
 </div>
 </template>
 <style>

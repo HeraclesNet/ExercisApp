@@ -13,6 +13,11 @@
       <li id="card" is="Post" v-for="Posts in postUser" v-bind:Post= "Posts" v-bind:key="Posts.id"></li>
     </ul>
     <div class="break"></div>
+    <div>
+      <ul style="padding-left: 0px;">
+        <li id="card" is="Post" v-for="content in contents" v-bind:Post= "content" v-bind:key="content.id"></li>
+      </ul>
+    </div>
     <div v-if="filtro === 'nuevo'">
       <ul style="padding-left: 0px;">
         <li id="card" is="Post" v-for="content in contents" v-bind:Post= "content" v-bind:key="content.id"></li>
@@ -68,6 +73,7 @@ export default {
     PostBar,
     Post
   },
+  // metodo para Paginacion
   methods: {
     postear: function (postCreado) {
       this.postUser.push(postCreado)

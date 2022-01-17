@@ -5,6 +5,7 @@
             <div class="md-subhead">{{Post.getEscrito()}}</div>
             <div class="md-subhead"> <router-link  :to="{name:'Profile', params:{nickName: Post.getNickName()}}">{{Post.getUser()}}</router-link> </div>
           </md-card-header-text>
+           <!--Solucionar el undefined-->
           <md-card-content v-if="Post.getExiste() === true">
             <md-card-media>
                <img :src = "Post.getUrl()"/>

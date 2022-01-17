@@ -2,6 +2,7 @@
   <div class="conf">
     <md-card md-with-hover>
       <md-ripple>
+      <form>
         <md-card-header>
           <div class="md-title">Post</div>
           <div class="md-subhead">Esto es un comentario embebido</div>
@@ -9,19 +10,20 @@
         <md-card-content>
           <md-field>
             <label>Contenido</label>
-            <md-textarea v-model="textarea" md-counter="80"></md-textarea>
+            <md-textarea v-model="textarea" md-counter="80" md-clearable></md-textarea>
           </md-field>
         </md-card-content>
         <md-card-actions md-alignment="space-between">
           <md-button>
             <!-- <input type="file" accept="image/*" @change="uploadImage($event)" id="file-input"/> -->
-            <md-field accept="image/*" id="file-input">
+            <md-field accept="image/*" id="file-input" md-clearable>
               <label>Subir Imagen</label>
-              <md-file v-model="placeholder" @change="uploadImage($event)" placeholder="Subir Imagen" />
+                <md-file v-model="placeholder" @change="uploadImage($event)" placeholder="Subir Imagen" />
               </md-field>
           </md-button>
-          <md-button v-on:click="postear()" key="componentKey">Publicar</md-button>
+          <md-button v-on:click="postear()" key="componentKey" type="reset">Publicar</md-button>
         </md-card-actions>
+      </form>
       </md-ripple>
     </md-card>
   </div>
@@ -40,7 +42,8 @@ export default {
   data () {
     return {
       userPost: new FormData(),
-      componentKey: 0,
+      textarea: null,
+      placeholder: null,
       file: '',
       id: 1
     }
@@ -61,11 +64,10 @@ export default {
           alert('Error en la petición. Intente nuevamente')
         } else {
         }
-        console.log(response.status)
         this.url = response.data.message
         this.id = response.data.message.id
-        console.log(response.data.message.id)
         this.crearPost()
+        this.forceReset()
       }).catch(e => {
         console.log(e)
       })
@@ -79,16 +81,22 @@ export default {
       if (existe === true) {
         post.setUrl(this.url)
       }
-      console.log(this.$store.state.sesion.name)
       this.$emit('PostCreado', post)
     },
     uploadImage (event) {
+      console.log(this.file)
       this.file = event.target.files[0]
       this.userPost.append('file', this.file)
     },
     forceRerender () {
-      // volver A implementar esta mamada
-      this.componentKey += 1
+      this.$forceUpdate()
+    },
+    forceReset () {
+      this.textarea = null
+      this.placeholder = null
+      this.userPost = new FormData()
+      this.file = null
+      this.id = null
     }
   }
 }
