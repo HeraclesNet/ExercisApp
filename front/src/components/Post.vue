@@ -55,7 +55,7 @@ export default {
       const params = new URLSearchParams()
       params.append('postId', this.Post.getId())
       params.append('muscle', 1)
-      axios.put('http://localhost:8081/user/post/muscle', params,
+      axios.put('http://localhost:8081/post/muscle', params,
         {
           headers: {
             Authorization: 'Bearer ' + this.$store.state.sesion.token,
@@ -76,7 +76,7 @@ export default {
       const params = new URLSearchParams()
       params.append('postId', this.Post.getId())
       params.append('muscle', -1)
-      axios.put('http://localhost:8081/user/post/muscle', params,
+      axios.put('http://localhost:8081/post/muscle', params,
         {
           headers: {
             Authorization: 'Bearer ' + this.$store.state.sesion.token,

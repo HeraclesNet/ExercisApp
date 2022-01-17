@@ -2,8 +2,7 @@
   <div class="user">
   <NavBarHome/>
   <div id="nombre">
-      <h1>{{this.nickName}}</h1>
-    </div>
+  </div>
   <!-- Info Usuario -->
   <div id="profile">
      <md-card id="avatar">
@@ -44,14 +43,9 @@
   </div>
   <!-- Post history Usuario -->
   <div id="PublishedContent">
-    <div id="NewPost">
-      <ul>
-        <li is="Post" v-for="Posts in postUser" v-bind:Post= "Posts" v-bind:key="Posts.id"></li>
-      </ul>
-    </div>
     <div id="PostHystory">
-      <ul>
-        <li is="Post" v-for="content in contents" v-bind:Post= "content" v-bind:key="content.id"></li>
+      <ul style="padding-left: 0px;">
+        <li id="card" is="Post" v-for="content in contents" v-bind:Post= "content" v-bind:key="content.id"></li>
       </ul>
     </div>
   </div>
@@ -61,15 +55,17 @@
 import NavBarHome from '@/components/NavBarHome.vue'
 // import PostBar from '@/components/PostBar.vue'
 import Post from '@/components/Post.vue'
+import Posts from '@/Objects/Post.js'
 import axios from 'axios'
 export default {
   name: 'User',
-  Created () {
+  created () {
     this.getPosts()
     this.LoadInfo()
   },
   data () {
     return {
+      disabled: null,
       name: null,
       peso: null,
       altura: null,
@@ -106,23 +102,29 @@ export default {
     },
     transformarContenido: function (contenido) {
       var temp = []
-      for (let i = 0; i <= contenido.length; i++) {
-        const post = new Post(contenido.id, contenido.user, contenido.post, contenido.hasFiles, contenido.file.url)
-        post.setMuscles(contenido.muscles)
-        post.setMediaType(contenido.files.type)
-        post.setnickName(contenido.user.nickname)
-        post.setLiked(contenido.muscle)
-        temp.push(post)
+      for (let i = 0; i < contenido.length; i++) {
+        const posts = new Posts(contenido[i].id, contenido[i].user.name, contenido[i].post, contenido[i].hasFiles)
+        if (contenido[i].hasFiles === true) {
+          posts.setUrl(contenido[i].files[0].url)
+          posts.setMediaType(contenido[i].files[0].type)
+        }
+        posts.setMuscles(contenido[i].muscles)
+        posts.setNickName(contenido[i].user.nickName)
+        posts.setLiked(contenido[i].muscle)
+        temp.unshift(posts)
       }
       this.contents = temp
     },
     getPosts: function () {
-      axios.get('http://localhost:8081/user/posts',
+      axios.get('http://localhost:8081/profile/user',
         {
           headers: {
+            Authorization: 'Bearer ' + this.$store.state.sesion.token,
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
           }
         }).then(response => {
-        this.transformarContenido(response.data.posts)
+        this.transformarContenido(response.data.posts.content)
         console.log(response.data)
       }).catch(e => {
         console.log(e)

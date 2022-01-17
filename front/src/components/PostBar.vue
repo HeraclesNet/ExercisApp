@@ -42,8 +42,8 @@ export default {
   data () {
     return {
       userPost: new FormData(),
-      textarea: null,
-      placeholder: null,
+      textarea: this.textarea,
+      placeholder: this.placeholder,
       file: '',
       id: 1
     }
@@ -51,7 +51,7 @@ export default {
   methods: {
     postear: function () {
       this.userPost.append('content', this.textarea)
-      axios.post('http://localhost:8081/user/media/upload',
+      axios.post('http://localhost:8081/post/media/upload',
         this.userPost, {
           headers: {
             Authorization: 'Bearer ' + this.$store.state.sesion.token,
@@ -87,9 +87,6 @@ export default {
       console.log(this.file)
       this.file = event.target.files[0]
       this.userPost.append('file', this.file)
-    },
-    forceRerender () {
-      this.$forceUpdate()
     },
     forceReset () {
       this.textarea = null

@@ -13,11 +13,6 @@
       <li id="card" is="Post" v-for="Posts in postUser" v-bind:Post= "Posts" v-bind:key="Posts.id"></li>
     </ul>
     <div class="break"></div>
-    <div>
-      <ul style="padding-left: 0px;">
-        <li id="card" is="Post" v-for="content in contents" v-bind:Post= "content" v-bind:key="content.id"></li>
-      </ul>
-    </div>
     <div v-if="filtro === 'nuevo'">
       <ul style="padding-left: 0px;">
         <li id="card" is="Post" v-for="content in contents" v-bind:Post= "content" v-bind:key="content.id"></li>
@@ -98,8 +93,8 @@ export default {
       const params = new URLSearchParams()
       params.append('size', 10)
       params.append('number', 0)
-      params.append('sort', 'muscles')
-      axios.get('http://localhost:8081/user/posts?' + params.toString(),
+      params.append('sort', 'friends')
+      axios.get('http://localhost:8081/post/get?' + params.toString(),
         {
           headers: {
             Authorization: 'Bearer ' + this.$store.state.sesion.token,
@@ -121,7 +116,7 @@ export default {
       params.append('size', 10)
       params.append('number', 0)
       params.append('sort', 'createdAt')
-      axios.get('http://localhost:8081/user/posts?' + params.toString(),
+      axios.get('http://localhost:8081/post/get?' + params.toString(),
         {
           headers: {
             Authorization: 'Bearer ' + this.$store.state.sesion.token,
@@ -143,7 +138,7 @@ export default {
       params.append('size', 10)
       params.append('number', 0)
       params.append('sort', 'muscles')
-      axios.get('http://localhost:8081/user/posts?' + params.toString(),
+      axios.get('http://localhost:8081/post/get?' + params.toString(),
         {
           headers: {
             Authorization: 'Bearer ' + this.$store.state.sesion.token,
