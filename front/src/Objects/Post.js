@@ -13,8 +13,7 @@ export default class Post {
     // bool que determina el like
     // nickname
 
-    constructor (id, user, escrito, existe, url) {
-      this.Url = url
+    constructor (id, user, escrito, existe) {
       this.Usuario = user
       this.Escrito = escrito
       this.Id = id
@@ -85,7 +84,7 @@ export default class Post {
       return this.Liked
     }
 
-    getNickname () {
+    getNickName () {
       return this.NickName
     }
 

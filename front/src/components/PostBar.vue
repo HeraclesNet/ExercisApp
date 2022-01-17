@@ -63,18 +63,22 @@ export default {
         }
         console.log(response.status)
         this.url = response.data.message
-        // this.id = response.data.message.id
+        this.id = response.data.message.id
+        console.log(response.data.message.id)
         this.crearPost()
       }).catch(e => {
         console.log(e)
       })
     },
     crearPost: function () {
-      var existe = false
+      var existe = true
       if (this.url === 'OnlyText') {
         existe = false
       }
-      const post = new Post(this.id, this.$store.state.sesion.name, this.textarea, existe, this.url)
+      const post = new Post(this.id, this.$store.state.sesion.name, this.textarea, existe)
+      if (existe === true) {
+        post.setUrl(this.url)
+      }
       console.log(this.$store.state.sesion.name)
       this.$emit('PostCreado', post)
     },
