@@ -57,7 +57,8 @@ export default {
       dateOfBirth: null,
       gender: null,
       weight: null,
-      height: null
+      height: null,
+      refreshtoken: null
     }
   },
   methods: {
@@ -70,6 +71,7 @@ export default {
       this.$store.state.sesion.weight = this.weight
       this.$store.state.sesion.height = this.height
       this.$store.state.sesion.gender = this.gender
+      this.$store.state.sesion.refreshtoken = this.refreshtoken
     },
     ingresar: function (rt) {
       if (rt === 200) {

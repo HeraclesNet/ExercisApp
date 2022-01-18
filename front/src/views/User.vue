@@ -2,9 +2,15 @@
   <div class="user">
   <NavBarHome/>
   <div id="nombre">
+    <h1>{{this.name}}</h1>
+  </div>
+  <div id="options">
+    <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('profile')">Informacion Personal</md-button>
+    <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('postHistory')">Publicaciones pasadas</md-button>
+    <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('rutinas')">Rutinas</md-button>
   </div>
   <!-- Info Usuario -->
-  <div id="profile">
+  <div id="profile" v-if="displaying === 'profile'">
      <md-card id="avatar">
        <md-card-header>
           <div class="md-title">Imagen</div>
@@ -42,12 +48,14 @@
     </md-card>
   </div>
   <!-- Post history Usuario -->
-  <div id="PublishedContent">
-    <div id="PostHystory">
-      <ul style="padding-left: 0px;">
-        <li id="card" is="Post" v-for="content in contents" v-bind:Post= "content" v-bind:key="content.id"></li>
-      </ul>
-    </div>
+  <div id="PublishedContent" v-if="displaying === 'postHistory'">
+    <ul style="padding-left: 0px;">
+      <li id="card" is="Post" v-for="content in contents" v-bind:Post= "content" v-bind:key="content.id"></li>
+    </ul>
+  </div>
+  <!-- Rutinas -->
+  <div id="Rutinas" v-if="displaying === 'rutinas'">
+    
   </div>
  </div>
 </template>
@@ -60,12 +68,16 @@ import axios from 'axios'
 export default {
   name: 'User',
   created () {
-    this.getPosts()
     this.LoadInfo()
   },
   data () {
     return {
+      // Relevantes para la vista
+      displaying: 'profile',
       disabled: null,
+      contents: null,
+      postUser: [],
+      // Info usuario
       name: null,
       peso: null,
       altura: null,
@@ -73,9 +85,7 @@ export default {
       edad: null, // yo la calculo
       nickname: null,
       visibilidad: null,
-      genero: null,
-      contents: null,
-      postUser: []
+      genero: null
     }
   },
   components: {
@@ -84,9 +94,6 @@ export default {
     Post
   },
   methods: {
-    // 2 post
-    // peso altura nickname
-    // visibilidad genero
     LoadInfo: function () {
       this.token = this.$store.state.sesion.token
       this.email = this.$store.state.sesion.email
@@ -129,7 +136,66 @@ export default {
       }).catch(e => {
         console.log(e)
       })
-    }
+    },
+    getRutinas: function () {
+      axios.get('http://localhost:8081/profile/user',
+        {
+          headers: {
+            Authorization: 'Bearer ' + this.$store.state.sesion.token,
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+          }
+        }).then(response => {
+        this.transformarContenido(response.data.posts.content)
+        console.log(response.data)
+      }).catch(e => {
+        console.log(e)
+      })
+    },
+    clear: function () {
+      this.contents = []
+      this.postUser = []
+    },
+    changeDisplay: function (newDisplay) {
+      this.clear()
+      this.display = newDisplay
+      if (newDisplay === 'profile') {
+      } else if (newDisplay === 'postHistory') {
+        this.getPosts()
+      } else if (newDisplay === 'rutinas') {
+        this.getRutinas()
+      }
+    },
+    setProfile1: function () {
+      axios.get('http://localhost:8081/profile/user',
+        {
+          headers: {
+            Authorization: 'Bearer ' + this.$store.state.sesion.token,
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+          }
+        }).then(response => {
+        this.transformarContenido(response.data.posts.content)
+        console.log(response.data)
+      }).catch(e => {
+        console.log(e)
+      })
+    },
+    setProfile2: function () {
+      axios.get('http://localhost:8081/profile/user',
+        {
+          headers: {
+            Authorization: 'Bearer ' + this.$store.state.sesion.token,
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+          }
+        }).then(response => {
+        this.transformarContenido(response.data.posts.content)
+        console.log(response.data)
+      }).catch(e => {
+        console.log(e)
+      })
+    },
   }
 }
 </script>
