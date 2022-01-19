@@ -38,6 +38,7 @@
 import NavBarHome from '@/components/NavBarHome.vue'
 import PostBar from '@/components/PostBar.vue'
 import Post from '@/components/Post.vue'
+import Posts from '@/Objects/Post.js'
 import axios from 'axios'
 export default {
   name: 'Home',
@@ -47,7 +48,7 @@ export default {
   beforeDestroy () {
     document.querySelector('body').setAttribute('style', '')
   },
-  Created () {
+  created () {
     this.getDataDestacados()
   },
   computed: {
@@ -58,7 +59,7 @@ export default {
   data () {
     return {
       contents: null,
-      filtro: 'destacados',
+      filtro: 'destacado',
       postUser: []
     }
   },
@@ -67,58 +68,89 @@ export default {
     PostBar,
     Post
   },
+  // metodo para Paginacion
   methods: {
     postear: function (postCreado) {
-      this.postUser.push(postCreado)
+      this.postUser.unshift(postCreado)
     },
     transformarContenido: function (contenido) {
       var temp = []
-      for (let i = 0; i <= contenido.length; i++) {
-        const post = new Post(contenido.id, contenido.user, contenido.post, contenido.hasFiles, contenido.file.url)
-        post.setMuscles(contenido.muscles)
-        post.setMediaType(contenido.files.type)
-        post.setnickName(contenido.user.nickname)
-        post.setLiked(contenido.muscle)
-        temp.push(post)
+      for (let i = 0; i < contenido.length; i++) {
+        const posts = new Posts(contenido[i].id, contenido[i].user.name, contenido[i].post, contenido[i].hasFiles)
+        if (contenido[i].hasFiles === true) {
+          posts.setUrl(contenido[i].files[0].url)
+          posts.setMediaType(contenido[i].files[0].type)
+        }
+        posts.setMuscles(contenido[i].muscles)
+        posts.setNickName(contenido[i].user.nickName)
+        posts.setLiked(contenido[i].muscle)
+        temp.unshift(posts)
       }
       this.contents = temp
     },
     // Agregar parametros de filtrados
     getDataDestacados: function () {
-      axios.get('http://localhost:8081/user/posts',
+      const params = new URLSearchParams()
+      params.append('size', 10)
+      params.append('number', 0)
+      params.append('sort', 'friends')
+      axios.get('http://localhost:8081/post/get?' + params.toString(),
         {
           headers: {
-            Authorization: 'Bearer ' + this.$store.state.sesion.token
+            Authorization: 'Bearer ' + this.$store.state.sesion.token,
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
           }
         }).then(response => {
-        this.transformarContenido(response.data.content)
-        console.log(response.data)
+        if (response.status !== 200) {
+          alert('Error en la petición. Intente nuevamente')
+        } else {
+          this.transformarContenido(response.data.content)
+        }
       }).catch(e => {
         console.log(e)
       })
     },
     getDataNuevos: function () {
-      axios.get('http://localhost:8081/user/posts',
+      const params = new URLSearchParams()
+      params.append('size', 10)
+      params.append('number', 0)
+      params.append('sort', 'createdAt')
+      axios.get('http://localhost:8081/post/get?' + params.toString(),
         {
           headers: {
-            Authorization: 'Bearer ' + this.$store.state.sesion.token
+            Authorization: 'Bearer ' + this.$store.state.sesion.token,
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
           }
         }).then(response => {
-        this.transformarContenido(response.data.content)
-        console.log(response.data)
+        if (response.status !== 200) {
+          alert('Error en la petición. Intente nuevamente')
+        } else {
+          this.transformarContenido(response.data.content)
+        }
       }).catch(e => {
         console.log(e)
       })
     },
     getDataVotos: function () {
-      axios.get('http://localhost:8081/user/posts',
+      const params = new URLSearchParams()
+      params.append('size', 10)
+      params.append('number', 0)
+      params.append('sort', 'muscles')
+      axios.get('http://localhost:8081/post/get?' + params.toString(),
         {
           headers: {
-            Authorization: 'Bearer ' + this.$store.state.sesion.token
+            Authorization: 'Bearer ' + this.$store.state.sesion.token,
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
           }
         }).then(response => {
-        this.transformarContenido(response.data.content)
-        console.log(response.data)
+        if (response.status !== 200) {
+          alert('Error en la petición. Intente nuevamente')
+        } else {
+          this.transformarContenido(response.data.content)
+        }
       }).catch(e => {
         console.log(e)
       })
@@ -133,7 +165,7 @@ export default {
       if (newFiltro === 'destacado') {
         this.getDataDestacados()
       } else if (newFiltro === 'nuevo') {
-        this.getDataNuevo()
+        this.getDataNuevos()
       } else if (newFiltro === 'votos') {
         this.getDataVotos()
       }

@@ -5,7 +5,7 @@
       <label>Nombre de Usuario</label>
       <md-input v-model="name"></md-input>
     </md-field>
-    <md-datepicker v-model="selectedDate">
+    <md-datepicker v-model="dateOfBirth">
       <label>Fecha de Nacimiento</label>
     </md-datepicker>
     <md-field>
@@ -24,7 +24,7 @@
       <md-input v-model="password" type="password"></md-input>
     </md-field>
     <div id = "RegisterButtons">
-      <md-button id="Create" v-on:click="crear(201)" style="color:#FFFBF4">
+      <md-button id="Create" v-on:click="getData()" style="color:#FFFBF4">
         Crear Cuenta
       </md-button>
       <md-button :to="{name:'Inicio'}" id="aceptar"  style="color:#FFFBF4">
@@ -66,9 +66,7 @@ export default {
         this.$emit('aceptar', this.name)
         this.guardarInfo()
       } else {
-        if (rt === 404) {
-          return false
-        }
+        alert('Error en la petición. Intente nuevamente')
       }
     },
     getData: function () {
@@ -82,8 +80,8 @@ export default {
           }
         }).then(response => {
         console.log(response.status)
-        this.crear(response.status)
         this.token = response.data.token
+        this.crear(response.status)
       }).catch(e => {
         console.log(e)
       })

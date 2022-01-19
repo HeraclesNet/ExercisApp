@@ -12,17 +12,33 @@
             <img src="../assets/Appxercise-04.png">
           </md-button>
         </md-avatar>
-        <!-- Faltan las opciones -->
-      <md-button :to="{name:'Profile'}" style="color:#ee2d2b">Perfil </md-button>
-      <md-button :to="{name:'User'}" style="color:#ee2d2b">Usuario </md-button>
-      <md-button style="color:#ee2d2b">Salir Cuenta <i class="material-icons" style="vertical-align:middle">logout</i></md-button>
+      <md-button :to="{name:'User'}" style="color:#ee2d2b"> Usuario </md-button>
+      <md-button :to="{name:'Home'}" style="color:#ee2d2b" v-on:click="DesecharInfo()"> Salir Cuenta <i class="material-icons" style="vertical-align:middle">logout</i></md-button>
     </md-toolbar>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'NavBarHome'
+  name: 'NavBarHome',
+  computed: {
+    sesion () {
+      return this.$store.state.sesion
+    }
+  },
+  methods: {
+    DesecharInfo: function () {
+      this.$store.state.sesion.token = null
+      this.$store.state.sesion.email = null
+      this.$store.state.sesion.name = null
+      this.$store.state.sesion.nickName = null
+      this.$store.state.sesion.dateOfBirth = null
+      this.$store.state.sesion.weight = null
+      this.$store.state.sesion.height = null
+      this.$store.state.sesion.gender = null
+      this.$store.state.sesion.refreshtoken = null
+    }
+  }
 }
 </script>
 
