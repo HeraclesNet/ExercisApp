@@ -12,6 +12,7 @@
             <img src="../assets/Appxercise-04.png">
           </md-button>
         </md-avatar>
+      <md-button :to="{name:'Feed'}" style="color:#ee2d2b"> Pagina principal </md-button>
       <md-button :to="{name:'User'}" style="color:#ee2d2b"> Usuario </md-button>
       <md-button :to="{name:'Home'}" style="color:#ee2d2b" v-on:click="DesecharInfo()"> Salir Cuenta <i class="material-icons" style="vertical-align:middle">logout</i></md-button>
     </md-toolbar>
