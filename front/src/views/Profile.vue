@@ -22,6 +22,12 @@ import Posts from '@/Objects/Post.js'
 import axios from 'axios'
 export default {
   name: 'Profile',
+  beforeCreate () {
+    document.querySelector('html').setAttribute('style', 'background-image: url("Background_grey.jpg"); background-size: cover')
+  },
+  beforeDestroy () {
+    document.querySelector('body').setAttribute('style', '')
+  },
   created () {
     // this.getData()
     console.log(this.nickName)

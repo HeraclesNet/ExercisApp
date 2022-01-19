@@ -5,10 +5,16 @@
     <h1>{{this.name}}</h1>
   </div>
   <div id="options">
+<<<<<<< HEAD
     <md-button :to="{name:'Feed'}" style="background-color:#fff; color:#ee2d2b" >Pagina Principal</md-button>
     <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('profile')">Informacion Personal</md-button>
     <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('postHistory')">Publicaciones pasadas</md-button>
     <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('rutinas')">Rutinas</md-button>
+=======
+    <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="changeDisplay('profile')">Informacion Personal</md-button>
+    <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="changeDisplay('postHistory')">Publicaciones pasadas</md-button>
+    <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="changeDisplay('rutinas')">Rutinas</md-button>
+>>>>>>> e677684c3a40bd0dbaac829db6a71975e7fc301e
   </div>
   <!-- Info Usuario -->
   <div id="profile" v-if="displaying === 'profile'">
@@ -30,15 +36,27 @@
           <md-input v-model="disabled" disabled></md-input>
         </md-field>
         <md-field>
+          <label>Peso</label>
+          <md-input v-model="disabled" disabled></md-input>
+        </md-field>
+        <md-field>
+          <label>Altura</label>
+          <md-input v-model="disabled" disabled></md-input>
+        </md-field>
+        <md-field>
           <label>Fecha de Nacimiento</label>
           <md-input v-model="disabled" disabled></md-input>
         </md-field>
         <md-field>
-          <label>Dato1</label>
+          <label>Edad</label>
           <md-input v-model="disabled" disabled></md-input>
         </md-field>
         <md-field>
-          <label>Dato2</label>
+          <label>Nickname</label>
+          <md-input v-model="disabled" disabled></md-input>
+        </md-field>
+        <md-field>
+          <label>Genero</label>
           <md-input v-model="disabled" disabled></md-input>
         </md-field>
       </md-card-content>
@@ -55,9 +73,7 @@
     </ul>
   </div>
   <!-- Rutinas -->
-  <div id="Rutinas" v-if="displaying === 'rutinas'">
-    
-  </div>
+  <div id="Rutinas" v-if="displaying === 'rutinas'"></div>
  </div>
 </template>
 <script>
@@ -68,6 +84,12 @@ import Posts from '@/Objects/Post.js'
 import axios from 'axios'
 export default {
   name: 'User',
+  beforeCreate () {
+    document.querySelector('html').setAttribute('style', 'background-image: url("Background_grey.jpg"); background-size: cover')
+  },
+  beforeDestroy () {
+    document.querySelector('body').setAttribute('style', '')
+  },
   created () {
     this.LoadInfo()
   },
@@ -183,7 +205,7 @@ export default {
       }).catch(e => {
         console.log(e)
       })
-    },
+    }
   }
 }
 </script>
@@ -203,5 +225,8 @@ export default {
   font-family: 'TTOctosquares-Regular Regular';
   margin: 15px;
   width: 50%;
+}
+#options{
+  margin-left: 10px;
 }
 </style>
