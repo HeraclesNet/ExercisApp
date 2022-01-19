@@ -3,9 +3,9 @@
   <NavBarHome/>
   <!-- Filtros -->
   <div id="filtros">
-    <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeFiltro('votos')">Mas Gustados</md-button>
-    <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeFiltro('nuevo')">Mas Nuevos</md-button>
-    <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeFiltro('destacado')">Destacados</md-button>
+    <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="changeFiltro('votos')">Mas Gustados</md-button>
+    <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="changeFiltro('nuevo')">Mas Nuevos</md-button>
+    <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="changeFiltro('destacado')">Destacados</md-button>
   </div>
   <PostBar v-on:PostCreado="postear($event)"/>
   <div id="content">
@@ -74,6 +74,7 @@ export default {
       this.postUser.unshift(postCreado)
     },
     transformarContenido: function (contenido) {
+      this.$forceUpdate()
       var temp = []
       for (let i = 0; i < contenido.length; i++) {
         const posts = new Posts(contenido[i].id, contenido[i].user.name, contenido[i].post, contenido[i].hasFiles)
