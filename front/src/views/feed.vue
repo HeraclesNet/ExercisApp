@@ -42,7 +42,7 @@ import axios from 'axios'
 export default {
   name: 'Home',
   beforeCreate () {
-    document.querySelector('html').setAttribute('style', 'background: #36393e')
+    document.querySelector('html').setAttribute('style', 'background-image: url("Background_grey.jpg"); background-size: cover')
   },
   beforeDestroy () {
     document.querySelector('body').setAttribute('style', '')
