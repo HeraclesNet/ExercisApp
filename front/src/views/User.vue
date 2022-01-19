@@ -5,9 +5,10 @@
     <h1>{{this.name}}</h1>
   </div>
   <div id="options">
-    <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="changeDisplay('profile')">Informacion Personal</md-button>
-    <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="changeDisplay('postHistory')">Publicaciones pasadas</md-button>
-    <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="changeDisplay('rutinas')">Rutinas</md-button>
+    <md-button :to="{name:'Feed'}" style="background-color:#fff; color:#ee2d2b" >Pagina Principal</md-button>
+    <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('profile')">Informacion Personal</md-button>
+    <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('postHistory')">Publicaciones pasadas</md-button>
+    <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('rutinas')">Rutinas</md-button>
   </div>
   <!-- Info Usuario -->
   <div id="profile" v-if="displaying === 'profile'">
@@ -156,19 +157,6 @@ export default {
       })
     },
     getRutinas: function () {
-      axios.get('http://localhost:8081/profile/user',
-        {
-          headers: {
-            Authorization: 'Bearer ' + this.$store.state.sesion.token,
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
-          }
-        }).then(response => {
-        this.transformarContenido(response.data.posts.content)
-        console.log(response.data)
-      }).catch(e => {
-        console.log(e)
-      })
     },
     clear: function () {
       this.contents = []
