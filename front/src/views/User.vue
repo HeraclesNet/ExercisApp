@@ -5,16 +5,10 @@
     <h1>{{this.name}}</h1>
   </div>
   <div id="options">
-<<<<<<< HEAD
     <md-button :to="{name:'Feed'}" style="background-color:#fff; color:#ee2d2b" >Pagina Principal</md-button>
     <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('profile')">Informacion Personal</md-button>
     <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('postHistory')">Publicaciones pasadas</md-button>
     <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('rutinas')">Rutinas</md-button>
-=======
-    <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="changeDisplay('profile')">Informacion Personal</md-button>
-    <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="changeDisplay('postHistory')">Publicaciones pasadas</md-button>
-    <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="changeDisplay('rutinas')">Rutinas</md-button>
->>>>>>> e677684c3a40bd0dbaac829db6a71975e7fc301e
   </div>
   <!-- Info Usuario -->
   <div id="profile" v-if="displaying === 'profile'">
