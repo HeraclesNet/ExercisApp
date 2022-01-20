@@ -27,35 +27,36 @@
       <md-card-content>
         <md-field>
           <label>Nombre</label>
-          <md-input v-model="disabled" disabled></md-input>
+          <md-input v-model="name" :disabled="disabled"></md-input>
         </md-field>
         <md-field>
           <label>Peso</label>
-          <md-input v-model="disabled" disabled></md-input>
+          <md-input v-model="weight" :disabled="disabled"></md-input>
         </md-field>
         <md-field>
           <label>Altura</label>
-          <md-input v-model="disabled" disabled></md-input>
+          <md-input v-model="height" :disabled="disabled"></md-input>
         </md-field>
         <md-field>
           <label>Fecha de Nacimiento</label>
-          <md-input v-model="disabled" disabled></md-input>
+          <md-input v-model="born" :disabled="disabled"></md-input>
         </md-field>
         <md-field>
           <label>Edad</label>
-          <md-input v-model="disabled" disabled></md-input>
+          <md-input v-model="age" :disabled="disabled"></md-input>
         </md-field>
         <md-field>
           <label>Nickname</label>
-          <md-input v-model="disabled" disabled></md-input>
+          <md-input v-model="nick" :disabled="disabled"></md-input>
         </md-field>
         <md-field>
           <label>Genero</label>
-          <md-input v-model="disabled" disabled></md-input>
+          <md-input v-model="gender" :disabled="disabled"></md-input>
         </md-field>
       </md-card-content>
       <md-card-actions>
-        <md-button>Editar Perfil</md-button>
+        <md-button id="editar" v-if="!isHidden" v-on:click="disabled = !disabled; isHidden = true">Editar Perfil</md-button>
+        <md-button v-if="isHidden" v-on:click="disabled = !disabled; isHidden = false" style="color:#fff;background-color:#1d85cd">Guardar Cambios</md-button>
         <md-button style="color:#fff;background-color:#ee2d2b">Eliminar Cuenta</md-button>
       </md-card-actions>
     </md-card>
@@ -94,8 +95,9 @@ export default {
     return {
       // Relevantes para la vista
       displaying: 'profile',
-      disabled: null,
       contents: null,
+      disabled: 1,
+      isHidden: false,
       postUser: [],
       // Info usuario
       name: null,
@@ -226,6 +228,7 @@ export default {
   width: 50%;
 }
 #options{
+  font-family: 'TTOctosquares-Regular Regular';
   margin-left: 10px;
 }
 </style>
