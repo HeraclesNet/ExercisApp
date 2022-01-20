@@ -68,12 +68,14 @@
   </div>
   <!-- Rutinas -->
   <div id="Rutinas" v-if="displaying === 'rutinas'"></div>
+    <Rutinas v-if="displaying === 'rutinas'"/>
  </div>
 </template>
 <script>
 import NavBarHome from '@/components/NavBarHome.vue'
 // import PostBar from '@/components/PostBar.vue'
 import Post from '@/components/Post.vue'
+import Rutinas from '@/components/Rutinas.vue'
 import Posts from '@/Objects/Post.js'
 import axios from 'axios'
 export default {
@@ -86,6 +88,7 @@ export default {
   },
   created () {
     this.LoadInfo()
+    console.log(this.displaying)
   },
   data () {
     return {
@@ -108,6 +111,7 @@ export default {
   components: {
     NavBarHome,
     // PostBar,
+    Rutinas,
     Post
   },
   methods: {
@@ -162,13 +166,14 @@ export default {
     },
     changeDisplay: function (newDisplay) {
       this.clear()
-      this.display = newDisplay
+      this.displaying = newDisplay
       if (newDisplay === 'profile') {
       } else if (newDisplay === 'postHistory') {
         this.getPosts()
       } else if (newDisplay === 'rutinas') {
         this.getRutinas()
       }
+      console.log(this.displaying)
     },
     setProfile1: function () {
       axios.get('http://localhost:8081/profile/user',

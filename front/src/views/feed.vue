@@ -49,7 +49,12 @@ export default {
     document.querySelector('body').setAttribute('style', '')
   },
   created () {
+    this.pagina = 0
+    console.log(this.pagina)
     this.getDataDestacados()
+  },
+  mounted () {
+    this.getNextPost()
   },
   computed: {
     sesion () {
@@ -59,6 +64,7 @@ export default {
   data () {
     return {
       contents: null,
+      pagina: 0,
       filtro: 'destacado',
       postUser: []
     }
@@ -93,7 +99,7 @@ export default {
     getDataDestacados: function () {
       const params = new URLSearchParams()
       params.append('size', 10)
-      params.append('number', 0)
+      params.append('number', this.pagina)
       params.append('sort', 'friends')
       axios.get('http://localhost:8081/post/get?' + params.toString(),
         {
@@ -115,7 +121,7 @@ export default {
     getDataNuevos: function () {
       const params = new URLSearchParams()
       params.append('size', 10)
-      params.append('number', 0)
+      params.append('number', this.pagina)
       params.append('sort', 'createdAt')
       axios.get('http://localhost:8081/post/get?' + params.toString(),
         {
@@ -137,7 +143,7 @@ export default {
     getDataVotos: function () {
       const params = new URLSearchParams()
       params.append('size', 10)
-      params.append('number', 0)
+      params.append('number', this.pagina)
       params.append('sort', 'muscles')
       axios.get('http://localhost:8081/post/get?' + params.toString(),
         {
@@ -159,6 +165,7 @@ export default {
     clear: function () {
       this.contents = []
       this.postUser = []
+      this.pagina = 0
     },
     changeFiltro: function (newFiltro) {
       this.clear()
@@ -169,6 +176,22 @@ export default {
         this.getDataNuevos()
       } else if (newFiltro === 'votos') {
         this.getDataVotos()
+      }
+    },
+    getNextPost: function () {
+      window.onscroll = () => {
+        const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight
+        if (bottomOfWindow) {
+          this.pagina = this.pagina + 1
+          console.log(this.pagina)
+          if (this.filtro === 'destacado') {
+            this.getDataDestacados()
+          } else if (this.filtro === 'nuevo') {
+            this.getDataNuevos()
+          } else if (this.filtro === 'votos') {
+            this.getDataVotos()
+          }
+        }
       }
     }
   }
