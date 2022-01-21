@@ -29,9 +29,8 @@ export default {
     document.querySelector('body').setAttribute('style', '')
   },
   created () {
-    // this.getData()
-    console.log(this.nickName)
-    console.log('test')
+    this.getData()
+    this.getPosts()
   },
   props: {
     nickName: String
@@ -120,10 +119,31 @@ export default {
       }
       this.userPosts = temp
     },
+    getPosts: function () {
+      const params = new URLSearchParams()
+      params.append('nickName', this.nickName)
+      axios.get('http://localhost:8081/post/user?' + params.toString(),
+        {
+          headers: {
+            Authorization: 'Bearer ' + this.$store.state.sesion.token,
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+          }
+        }).then(response => {
+        if (response.status !== 200) {
+          alert('Error en la petición. Intente nuevamente')
+        } else {
+          this.transformarContenido(response.data)
+        }
+        console.log(response.data)
+      }).catch(e => {
+        console.log(e)
+      })
+    },
     getdata: function () {
       const params = new URLSearchParams()
       params.append('userTo', this.nickName)
-      axios.get('http://localhost:8081/user/posts',
+      axios.get('http://localhost:8081/profile/user?' + params.toString(),
         {
           headers: {
             Authorization: 'Bearer ' + this.$store.state.sesion.token,
@@ -141,7 +161,6 @@ export default {
           this.weight = response.data.user.weight
           this.gender = response.data.user.gender
           this.height = response.data.user.height
-          this.transformarContenido(response.data.posts)
         }
         console.log(response.data)
       }).catch(e => {

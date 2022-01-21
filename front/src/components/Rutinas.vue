@@ -12,7 +12,7 @@
 import axios from 'axios'
 // import VueScheduler from 'v-calendar-scheduler'
 import 'v-calendar-scheduler/lib/main.css'
-import Event from '@/Event/Post.js'
+import Event from '@/Objects/Event.js'
 export default {
   name: 'Rutinas',
   components: {
@@ -45,29 +45,28 @@ export default {
           endTime: '15:00',
           customAttribute: 'Im a custom attribute',
           name: 'Example 1'
-          
         }
       ]
     }
   },
   methods: {
     guardarInfo: function (content) {
-      let temp = []
+      const temp = []
       for (var key in content) {
         var obj = content[key]
-        const event = new Event(obj.customAttribute, obj.date, obj.startTime, obj.endTime, obj.name)
+        const event = new Event(obj.customAttribute, Date.parse(obj.date), obj.startTime, obj.endTime, obj.name)
         temp.push(event)
       }
-      this.events = temp 
+      this.events = temp
     },
     transformarInfo: function () {
-      let temp = []
+      const temp = []
       for (var key in this.events) {
         var obj = this.events[key]
         const event = new Event(obj.customAttribute, obj.date, obj.startTime, obj.endTime, obj.name)
         temp.push(event)
       }
-      return(temp)   
+      return (temp)
     },
     postInfo: function () {
       this.transformarInfo()

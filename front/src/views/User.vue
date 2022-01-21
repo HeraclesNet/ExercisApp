@@ -27,7 +27,7 @@
       <md-card-content>
         <md-field>
           <label>Nombre</label>
-          <md-input v-model="name" :disabled="disabled"></md-input>
+          <md-input v-model="name" disabled></md-input>
         </md-field>
         <md-field>
           <label>Peso</label>
@@ -39,7 +39,7 @@
         </md-field>
         <md-field>
           <label>Fecha de Nacimiento</label>
-          <md-input v-model="born" :disabled="disabled"></md-input>
+          <md-input v-model="born" disabled></md-input>
         </md-field>
         <md-field>
           <label>Edad</label>
@@ -47,17 +47,19 @@
         </md-field>
         <md-field>
           <label>Nickname</label>
-          <md-input v-model="nick" :disabled="disabled"></md-input>
+          <md-input v-model="nick" disabled></md-input>
         </md-field>
         <md-field>
           <label>Genero</label>
-          <md-input v-model="gender" :disabled="disabled"></md-input>
+          <md-input v-model="gender" disabled></md-input>
         </md-field>
+        <md-radio v-model="radio">Mi perfil es visible para todos los Usuario</md-radio>
+        <md-radio v-model="radio">Mi Perfil es Privado</md-radio>
       </md-card-content>
       <md-card-actions>
         <md-button id="editar" v-if="!isHidden" v-on:click="disabled = !disabled; isHidden = true">Editar Perfil</md-button>
         <md-button v-if="isHidden" v-on:click="disabled = !disabled; isHidden = false" style="color:#fff;background-color:#1d85cd">Guardar Cambios</md-button>
-        <md-button style="color:#fff;background-color:#ee2d2b">Eliminar Cuenta</md-button>
+        <md-button style="color:#fff;background-color:#ee2d2b"  v-on:click="eliminarCuenta()">Eliminar Cuenta</md-button>
       </md-card-actions>
     </md-card>
   </div>
@@ -146,7 +148,7 @@ export default {
       this.contents = temp
     },
     getPosts: function () {
-      axios.get('http://localhost:8081/profile/user',
+      axios.get('http://localhost:8081/post/user',
         {
           headers: {
             Authorization: 'Bearer ' + this.$store.state.sesion.token,
@@ -154,7 +156,7 @@ export default {
             'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
           }
         }).then(response => {
-        this.transformarContenido(response.data.posts.content)
+        this.transformarContenido(response.data)
         console.log(response.data)
       }).catch(e => {
         console.log(e)
@@ -203,6 +205,20 @@ export default {
         }).then(response => {
         this.transformarContenido(response.data.posts.content)
         console.log(response.data)
+      }).catch(e => {
+        console.log(e)
+      })
+    },
+    eliminarCuenta: function () {
+      axios.delete('http://localhost:8081/user/delete/account',
+        {
+          headers: {
+            Authorization: 'Bearer ' + this.$store.state.sesion.token,
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+          }
+        }).then(response => {
+        console.log(response.data.message)
       }).catch(e => {
         console.log(e)
       })

@@ -48,4 +48,4 @@ export default class Event {
     setDate (date) {
       this.date = date
     }
-  }
+}
