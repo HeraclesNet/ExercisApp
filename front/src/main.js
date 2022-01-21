@@ -7,9 +7,11 @@ import './assets/styles/Global.css'
 import router from './router'
 import VueResizeText from 'vue-resize-text'
 import { store } from './store/store'
+import VueScheduler from 'v-calendar-scheduler'
 
 Vue.use(VueMaterial)
 Vue.use(VueResizeText)
+Vue.use(VueScheduler)
 
 Vue.config.productionTip = false
 

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <vue-scheduler/>
+    <vue-scheduler :events="events" :event-dialog-config="dialogConfig" event-display="name"/>
     <div>
-      <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="undo()">Deshacer</md-button>
+      <!-- md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="LoadInfo()">Deshacer</md-button-->
       <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="guardarInfo()">Guardar</md-button>
     </div>
   </div>
@@ -10,14 +10,11 @@
 
 <script>
 import axios from 'axios'
-// import Vue from 'vue';
-import VueScheduler from 'v-calendar-scheduler';
-import 'v-calendar-scheduler/lib/main.css';
-// Vue.use(VueScheduler);
+// import VueScheduler from 'v-calendar-scheduler'
+import 'v-calendar-scheduler/lib/main.css'
 export default {
   name: 'Rutinas',
   components: {
-    VueScheduler
   },
   computed: {
     sesion () {
@@ -25,24 +22,32 @@ export default {
     }
   },
   created () {
-    this.loadEvents()
+    this.getInfo()
   },
   data () {
     return {
-      events: [],
-      newEvents: []
+      dialogConfig: {
+        title: 'Rutina',
+        createButtonLabel: 'Guardar',
+        showLabel: true,
+        fields: [
+          {
+            name: 'name',
+            label: 'Nombre de la rutina'
+          }
+        ]
+      },
+      events: [
+        {
+          date: new Date(),
+          startTime: '13:00',
+          endTime: '15:00',
+          name: 'Example 1'
+        }
+      ]
     }
   },
   methods: {
-    guardarInfo: function () {
-      // DayPilot.Calendar.events.find(id);
-      let temp = []
-      temp = DayPilot.Calendar.events.find(1)
-      return temp
-    },
-    LoadInfo: function () {
-      this.service.initialize()
-    },
     postInfo: function () {
       const params = new URLSearchParams()
       axios.put('http://localhost:8081/post/muscle', params,
@@ -74,6 +79,7 @@ export default {
         if (response.status !== 200) {
           alert('Error en la petición. Intente nuevamente')
         } else {
+          this.events = response.data
         }
       }).catch(e => {
         console.log(e)

@@ -50,7 +50,6 @@ export default {
   },
   created () {
     this.pagina = 0
-    console.log(this.pagina)
     this.getDataDestacados()
   },
   mounted () {
@@ -180,8 +179,10 @@ export default {
     },
     getNextPost: function () {
       window.onscroll = () => {
-        const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight
+        const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.body.scrollHeight
+        // const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight
         if (bottomOfWindow) {
+          console.log('ya', document.documentElement.scrollTop + window.innerHeight)
           this.pagina = this.pagina + 1
           console.log(this.pagina)
           if (this.filtro === 'destacado') {
