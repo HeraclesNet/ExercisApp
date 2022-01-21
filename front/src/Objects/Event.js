@@ -1,14 +1,16 @@
 export default class Event {
     Text = null;
-    End = null;
-    Start = 0;
-    Id = null;
+    endTime = null;
+    date = null;
+    startTime = 0;
+    customAttribute = null;
 
-    constructor (id, end, start, text) {
-      this.Start = start
-      this.End = end
-      this.Id = id
+    constructor (id, date, end, start, text) {
+      this.startTime = start
+      this.endTime = end
+      this.customAttribute = id
       this.Text = text
+      this.date = date
     }
 
     getText () {
@@ -16,23 +18,23 @@ export default class Event {
     }
 
     getEnd () {
-      return this.End
+      return this.endTime
     }
 
     getId () {
-      return this.Id
+      return this.customAttribute
     }
 
     getStart () {
-      return this.Start
+      return this.startTime
     }
 
     setEnd (end) {
-      this.End = end
+      this.endTime = end
     }
 
     setId (id) {
-      this.Id = id
+      this.customAttribute = id
     }
 
     setText (text) {
@@ -40,5 +42,10 @@ export default class Event {
     }
 
     setStart (start) {
-      this.Start = start
-    }}
+      this.startTime = start
+    }
+
+    setDate (date) {
+      this.date = date
+    }
+  }

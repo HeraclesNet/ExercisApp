@@ -12,6 +12,7 @@
 import axios from 'axios'
 // import VueScheduler from 'v-calendar-scheduler'
 import 'v-calendar-scheduler/lib/main.css'
+import Event from '@/Event/Post.js'
 export default {
   name: 'Rutinas',
   components: {
@@ -42,13 +43,34 @@ export default {
           date: new Date(),
           startTime: '13:00',
           endTime: '15:00',
+          customAttribute: 'Im a custom attribute',
           name: 'Example 1'
+          
         }
       ]
     }
   },
   methods: {
+    guardarInfo: function (content) {
+      let temp = []
+      for (var key in content) {
+        var obj = content[key]
+        const event = new Event(obj.customAttribute, obj.date, obj.startTime, obj.endTime, obj.name)
+        temp.push(event)
+      }
+      this.events = temp 
+    },
+    transformarInfo: function () {
+      let temp = []
+      for (var key in this.events) {
+        var obj = this.events[key]
+        const event = new Event(obj.customAttribute, obj.date, obj.startTime, obj.endTime, obj.name)
+        temp.push(event)
+      }
+      return(temp)   
+    },
     postInfo: function () {
+      this.transformarInfo()
       const params = new URLSearchParams()
       axios.put('http://localhost:8081/post/muscle', params,
         {
@@ -79,7 +101,7 @@ export default {
         if (response.status !== 200) {
           alert('Error en la petición. Intente nuevamente')
         } else {
-          this.events = response.data
+          this.transformarInfo(response.data)
         }
       }).catch(e => {
         console.log(e)
