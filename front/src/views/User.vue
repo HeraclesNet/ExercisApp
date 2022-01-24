@@ -91,7 +91,6 @@ export default {
   },
   created () {
     this.LoadInfo()
-    console.log(this.displaying)
   },
   data () {
     return {
@@ -157,7 +156,6 @@ export default {
           }
         }).then(response => {
         this.transformarContenido(response.data)
-        console.log(response.data)
       }).catch(e => {
         console.log(e)
       })
@@ -177,7 +175,6 @@ export default {
       } else if (newDisplay === 'rutinas') {
         this.getRutinas()
       }
-      console.log(this.displaying)
     },
     setProfile1: function () {
       axios.get('http://localhost:8081/profile/user',
@@ -189,7 +186,6 @@ export default {
           }
         }).then(response => {
         this.transformarContenido(response.data.posts.content)
-        console.log(response.data)
       }).catch(e => {
         console.log(e)
       })
@@ -204,7 +200,6 @@ export default {
           }
         }).then(response => {
         this.transformarContenido(response.data.posts.content)
-        console.log(response.data)
       }).catch(e => {
         console.log(e)
       })

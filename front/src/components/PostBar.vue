@@ -21,7 +21,7 @@
                 <md-file v-model="placeholder" @change="uploadImage($event)" placeholder="Subir Imagen" />
               </md-field>
           </md-button>
-          <md-button v-on:click="postear()" key="componentKey" type="reset">Publicar</md-button>
+          <md-button v-on:click="crearPost()" key="componentKey" type="reset">Publicar</md-button>
         </md-card-actions>
       </form>
       </md-ripple>
@@ -81,6 +81,9 @@ export default {
       if (existe === true) {
         post.setUrl(this.url)
       }
+      post.setMuscles(0)
+      post.setNickName(this.$store.state.sesion.nickName)
+      post.setLiked(false)
       this.$emit('PostCreado', post)
     },
     uploadImage (event) {

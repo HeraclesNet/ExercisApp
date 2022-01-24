@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-scheduler :events="events" :event-dialog-config="dialogConfig" event-display="name"/>
+    <vue-scheduler @event-created="eventCreated" :events="events" :event-dialog-config="dialogConfig" event-display="name"/>
     <div>
       <!-- md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="LoadInfo()">Deshacer</md-button-->
       <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="guardarInfo()">Guardar</md-button>
@@ -23,7 +23,7 @@ export default {
     }
   },
   created () {
-    this.getInfo()
+    this.transformarInfo(this.temps)
   },
   data () {
     return {
@@ -38,7 +38,8 @@ export default {
           }
         ]
       },
-      events: [
+      events: [],
+      temps: [
         {
           date: new Date(),
           startTime: '13:00',
@@ -50,7 +51,7 @@ export default {
     }
   },
   methods: {
-    guardarInfo: function (content) {
+    transformarInfo: function (content) {
       const temp = []
       for (var key in content) {
         var obj = content[key]
@@ -59,13 +60,14 @@ export default {
       }
       this.events = temp
     },
-    transformarInfo: function () {
+    guardarInfo: function () {
       const temp = []
       for (var key in this.events) {
         var obj = this.events[key]
         const event = new Event(obj.customAttribute, obj.date, obj.startTime, obj.endTime, obj.name)
         temp.push(event)
       }
+      console.log(temp)
       return (temp)
     },
     postInfo: function () {
@@ -105,6 +107,30 @@ export default {
       }).catch(e => {
         console.log(e)
       })
+    },
+    getId: function () {
+      const params = new URLSearchParams()
+      axios.put('http://localhost:8081/post/muscle', params,
+        {
+          headers: {
+            Authorization: 'Bearer ' + this.$store.state.sesion.token,
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+          }
+        }).then(response => {
+        if (response.status !== 200) {
+          alert('Error en la petición. Intente nuevamente')
+        } else {
+          this.transformarInfo(response.data)
+        }
+      }).catch(e => {
+        console.log(e)
+      })
+    },
+    eventCreated (event) {
+      console.log('Event created')
+      event.customAttribute = this.getId()
+      console.log(event)
     }
   }
 }

@@ -1,20 +1,20 @@
 export default class Event {
-    Text = null;
+  name = null;
     endTime = null;
     date = null;
     startTime = 0;
     customAttribute = null;
 
-    constructor (id, date, end, start, text) {
+    constructor (id, date, end, start, name) {
       this.startTime = start
       this.endTime = end
       this.customAttribute = id
-      this.Text = text
+      this.name = name
       this.date = date
     }
 
-    getText () {
-      return this.Text
+    getName () {
+      return this.name
     }
 
     getEnd () {
@@ -37,8 +37,8 @@ export default class Event {
       this.customAttribute = id
     }
 
-    setText (text) {
-      this.Text = text
+    setName (name) {
+      this.name = name
     }
 
     setStart (start) {

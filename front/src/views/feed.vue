@@ -79,7 +79,7 @@ export default {
       this.postUser.unshift(postCreado)
     },
     transformarContenido: function (contenido) {
-      this.$forceUpdate()
+      // this.$forceUpdate()
       var temp = []
       for (let i = 0; i < contenido.length; i++) {
         const posts = new Posts(contenido[i].id, contenido[i].user.name, contenido[i].post, contenido[i].hasFiles)
