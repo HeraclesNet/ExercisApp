@@ -23,7 +23,8 @@ export default {
     }
   },
   created () {
-    this.transformarInfo(this.temps)
+    console.log(this.temps)
+    this.getInfo()
   },
   data () {
     return {
@@ -55,7 +56,7 @@ export default {
       const temp = []
       for (var key in content) {
         var obj = content[key]
-        const event = new Event(obj.customAttribute, Date.parse(obj.date), obj.startTime, obj.endTime, obj.name)
+        const event = new Event(obj.id, Date.parse(obj.date), obj.end_t, obj.start_t, obj.text)
         temp.push(event)
       }
       this.events = temp
@@ -90,8 +91,8 @@ export default {
       })
     },
     getInfo: function () {
-      const params = new URLSearchParams()
-      axios.put('http://localhost:8081/post/muscle', params,
+      // const params = new URLSearchParams()
+      axios.get('http://localhost:8081/profile/get/rutina',
         {
           headers: {
             Authorization: 'Bearer ' + this.$store.state.sesion.token,

@@ -5,12 +5,59 @@
       <h1>{{this.nickName}}</h1>
     </div>
     <div>
+      <div id="profile">
+     <md-card id="avatar">
+       <md-card-header>
+          <div class="md-title">Imagen</div>
+       </md-card-header>
+      <md-card-media>
+        <img src="../assets/avatar_default-01.png" alt="Usuario">
+      </md-card-media>
+    </md-card>
+    <md-card id="profile-data">
+      <md-card-header>
+        <div class="md-title">Perfil</div>
+      </md-card-header>
+      <md-card-content>
+        <md-field>
+          <label>Nombre</label>
+          <md-input v-model="name" disabled></md-input>
+        </md-field>
+        <md-field>
+          <label>Peso</label>
+          <md-input v-model="weight" :disabled="disabled"></md-input>
+        </md-field>
+        <md-field>
+          <label>Altura</label>
+          <md-input v-model="height" :disabled="disabled"></md-input>
+        </md-field>
+        <md-field>
+          <label>Fecha de Nacimiento</label>
+          <md-input v-model="born" disabled></md-input>
+        </md-field>
+        <md-field>
+          <label>Edad</label>
+          <md-input v-model="age" :disabled="disabled"></md-input>
+        </md-field>
+        <md-field>
+          <label>Nickname</label>
+          <md-input v-model="nick" disabled></md-input>
+        </md-field>
+        <md-field>
+          <label>Genero</label>
+          <md-input v-model="gender" disabled></md-input>
+        </md-field>
+        <md-radio v-model="radio">Mi perfil es visible para todos los Usuario</md-radio>
+        <md-radio v-model="radio">Mi Perfil es Privado</md-radio>
+      </md-card-content>
       <md-button :to="{name:'Feed'}" style="color:#FFFBF4"> volver </md-button>
       <md-button style="color:#FFFBF4" v-on:click="postSeguir()"> seguir </md-button>
+    </md-card>
+    </div>
     </div>
     <div id="userPost">
       <ul>
-        <li is="Post" v-for="Posts in userPost" v-bind:Post= "Posts" v-bind:key="Posts.id"></li>
+        <li is="Post" v-for="Posts in userPosts" v-bind:Post= "Posts" v-bind:key="Posts.id"></li>
     </ul>
     </div>
  </div>
@@ -140,9 +187,9 @@ export default {
         console.log(e)
       })
     },
-    getdata: function () {
+    getData: function () {
       const params = new URLSearchParams()
-      params.append('userTo', this.nickName)
+      params.append('nickName', this.nickName)
       axios.get('http://localhost:8081/profile/user?' + params.toString(),
         {
           headers: {
@@ -154,6 +201,7 @@ export default {
         if (response.status !== 200) {
           alert('Error en la petición. Intente nuevamente')
         } else {
+          console.log(response.data)
           this.email = response.data.user.email
           this.name = response.data.user.name
           this.nickName = response.data.user.nickName

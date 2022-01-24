@@ -49,7 +49,7 @@ export default {
     document.querySelector('body').setAttribute('style', '')
   },
   created () {
-    this.pagina = 0
+    this.clear()
     this.getDataDestacados()
   },
   mounted () {
@@ -90,9 +90,10 @@ export default {
         posts.setMuscles(contenido[i].muscles)
         posts.setNickName(contenido[i].user.nickName)
         posts.setLiked(contenido[i].muscle)
-        temp.unshift(posts)
+        // temp.unshift(posts)
+        temp.push(posts)
       }
-      this.contents = temp
+      this.contents = temp.concat(this.contents)
     },
     // Agregar parametros de filtrados
     getDataDestacados: function () {
@@ -170,19 +171,21 @@ export default {
       this.clear()
       this.filtro = newFiltro
       if (newFiltro === 'destacado') {
+        this.filtro = 'destacado'
         this.getDataDestacados()
       } else if (newFiltro === 'nuevo') {
         this.getDataNuevos()
+        this.filtro = 'nuevo'
       } else if (newFiltro === 'votos') {
         this.getDataVotos()
+        this.filtro = 'votos'
       }
     },
     getNextPost: function () {
       window.onscroll = () => {
-        const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.body.scrollHeight
+        const bottomOfWindow = (document.documentElement.scrollTop + window.innerHeight === document.body.scrollHeight) || (document.documentElement.scrollTop + window.innerHeight > document.body.scrollHeight)
         // const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight
         if (bottomOfWindow) {
-          console.log('ya', document.documentElement.scrollTop + window.innerHeight)
           this.pagina = this.pagina + 1
           console.log(this.pagina)
           if (this.filtro === 'destacado') {
@@ -192,6 +195,7 @@ export default {
           } else if (this.filtro === 'votos') {
             this.getDataVotos()
           }
+        } else {
         }
       }
     }

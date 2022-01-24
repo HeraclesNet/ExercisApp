@@ -59,7 +59,7 @@
       <md-card-actions>
         <md-button id="editar" v-if="!isHidden" v-on:click="disabled = !disabled; isHidden = true">Editar Perfil</md-button>
         <md-button v-if="isHidden" v-on:click="disabled = !disabled; isHidden = false" style="color:#fff;background-color:#1d85cd">Guardar Cambios</md-button>
-        <md-button style="color:#fff;background-color:#ee2d2b"  v-on:click="eliminarCuenta()">Eliminar Cuenta</md-button>
+        <md-button style="color:#fff;background-color:#ee2d2b" v-on:click="eliminarCuenta()">Eliminar Cuenta</md-button>
       </md-card-actions>
     </md-card>
   </div>
@@ -91,6 +91,7 @@ export default {
   },
   created () {
     this.LoadInfo()
+    this.clear()
   },
   data () {
     return {
@@ -118,6 +119,16 @@ export default {
     Post
   },
   methods: {
+    eliminar: function () {
+      this.$store.state.sesion.email = null
+      this.$store.state.sesion.name = null
+      this.$store.state.sesion.nickName = null
+      this.$store.state.sesion.dateOfBirth = null
+      this.$store.state.sesion.weight = null
+      this.$store.state.sesion.height = null
+      this.$store.state.sesion.gender = null
+      this.$store.state.sesion.refreshtoken = null
+    },
     LoadInfo: function () {
       this.token = this.$store.state.sesion.token
       this.email = this.$store.state.sesion.email
@@ -205,6 +216,7 @@ export default {
       })
     },
     eliminarCuenta: function () {
+      console.log('no se que esta pasandooo')
       axios.delete('http://localhost:8081/user/delete/account',
         {
           headers: {
@@ -214,6 +226,7 @@ export default {
           }
         }).then(response => {
         console.log(response.data.message)
+        this.eliminar()
       }).catch(e => {
         console.log(e)
       })

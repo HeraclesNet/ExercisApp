@@ -24,7 +24,7 @@
       <md-input v-model="password" type="password"></md-input>
     </md-field>
     <div id = "RegisterButtons">
-      <md-button id="Create" v-on:click="crear(201)" style="color:#FFFBF4">
+      <md-button id="Create" v-on:click="getData()" style="color:#FFFBF4">
         Crear Cuenta
       </md-button>
       <md-button :to="{name:'Inicio'}" id="aceptar"  style="color:#FFFBF4">

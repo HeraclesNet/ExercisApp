@@ -21,7 +21,7 @@
                 <md-file v-model="placeholder" @change="uploadImage($event)" placeholder="Subir Imagen" />
               </md-field>
           </md-button>
-          <md-button v-on:click="crearPost()" key="componentKey" type="reset">Publicar</md-button>
+          <md-button v-on:click="postear()" key="componentKey" type="reset">Publicar</md-button>
         </md-card-actions>
       </form>
       </md-ripple>
@@ -50,6 +50,7 @@ export default {
   },
   methods: {
     postear: function () {
+      const text = this.textarea
       this.userPost.append('content', this.textarea)
       axios.post('http://localhost:8081/post/media/upload',
         this.userPost, {
@@ -63,21 +64,21 @@ export default {
         if (response.status !== 200) {
           alert('Error en la petición. Intente nuevamente')
         } else {
+          this.url = response.data.message
+          this.id = response.data.message.id
+          this.crearPost(text)
+          this.forceReset()
         }
-        this.url = response.data.message
-        this.id = response.data.message.id
-        this.crearPost()
-        this.forceReset()
       }).catch(e => {
         console.log(e)
       })
     },
-    crearPost: function () {
+    crearPost: function (text) {
       var existe = true
       if (this.url === 'OnlyText') {
         existe = false
       }
-      const post = new Post(this.id, this.$store.state.sesion.name, this.textarea, existe)
+      const post = new Post(this.id, this.$store.state.sesion.name, text, existe)
       if (existe === true) {
         post.setUrl(this.url)
       }

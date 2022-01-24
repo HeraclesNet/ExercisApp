@@ -40,10 +40,6 @@ export default {
       liked: this.Post.getLiked()
     }
   },
-  created () {
-    console.log(this.Post.getEscrito())
-    console.log(this.Post.getLiked())
-  },
   methods: {
     like: function () {
       this.liked = true
