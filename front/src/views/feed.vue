@@ -62,6 +62,7 @@ export default {
   },
   data () {
     return {
+      sizePage: 15,
       contents: null,
       pagina: 0,
       filtro: 'destacado',
@@ -98,7 +99,7 @@ export default {
     // Agregar parametros de filtrados
     getDataDestacados: function () {
       const params = new URLSearchParams()
-      params.append('size', 10)
+      params.append('size', this.sizePage)
       params.append('number', this.pagina)
       params.append('sort', 'friends')
       axios.get('http://localhost:8081/post/get?' + params.toString(),
@@ -120,7 +121,7 @@ export default {
     },
     getDataNuevos: function () {
       const params = new URLSearchParams()
-      params.append('size', 10)
+      params.append('size', this.sizePage)
       params.append('number', this.pagina)
       params.append('sort', 'createdAt')
       axios.get('http://localhost:8081/post/get?' + params.toString(),
@@ -142,7 +143,7 @@ export default {
     },
     getDataVotos: function () {
       const params = new URLSearchParams()
-      params.append('size', 10)
+      params.append('size', this.sizePage)
       params.append('number', this.pagina)
       params.append('sort', 'muscles')
       axios.get('http://localhost:8081/post/get?' + params.toString(),
