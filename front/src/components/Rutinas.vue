@@ -3,7 +3,7 @@
     <vue-scheduler @event-created="eventCreated" :events="events" :event-dialog-config="dialogConfig" event-display="name"/>
     <div>
       <!-- md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="LoadInfo()">Deshacer</md-button-->
-      <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="guardarInfo()">Guardar</md-button>
+      <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="postInfo()">Guardar</md-button>
     </div>
   </div>
 </template>
@@ -24,8 +24,8 @@ export default {
     }
   },
   created () {
-    // this.getInfo()
-    this.transformarInfo(this.temps)
+    this.getInfo()
+    // this.transformarInfo(this.temps)
   },
   data () {
     return {
@@ -41,6 +41,7 @@ export default {
         ]
       },
       events: [],
+      newEvent: [],
       temps: [
         {
           date: 'Mon Jan 21 2022 18:27:51 GMT-0500 (hora estándar de Colombia)',
@@ -62,15 +63,15 @@ export default {
       const temp = []
       for (var key in content) {
         var obj = content[key]
-        const event = new Event(obj.id, Date.parse(obj.date), obj.endT, obj.startT, obj.text)
+        const event = new Event(obj.id, Date.parse(obj.date), obj.ent, obj.startt, obj.text)
         temp.push(event)
       }
       this.events = temp
     },
     guardarInfo: function () {
       const temp = []
-      for (var key in this.events) {
-        var obj = this.events[key]
+      for (var key in this.newEvent) {
+        var obj = this.newEvent[key]
         const rutinas = new Rutinas(obj.date, obj.startTime, obj.endTime, obj.name)
         temp.push(rutinas)
       }
@@ -78,9 +79,11 @@ export default {
       return (temp)
     },
     postInfo: function () {
-      this.transformarInfo()
-      const params = new URLSearchParams()
-      axios.put('http://localhost:8081/post/muscle', params,
+      // const params = new URLSearchParams()
+      // params.append(this.guardarInfo())
+      const list = this.guardarInfo()
+      console.log(list)
+      axios.post('http://localhost:8081/profile/add/rutina', list,
         {
           headers: {
             Authorization: 'Bearer ' + this.$store.state.sesion.token,
@@ -91,6 +94,8 @@ export default {
         if (response.status !== 200) {
           alert('Error en la petición. Intente nuevamente')
         } else {
+          this.newEvent = []
+          alert('Rutina guardada exitosamente')
         }
       }).catch(e => {
         console.log(e)
@@ -115,28 +120,9 @@ export default {
         console.log(e)
       })
     },
-    getId: function () {
-      const params = new URLSearchParams()
-      axios.put('http://localhost:8081/post/muscle', params,
-        {
-          headers: {
-            Authorization: 'Bearer ' + this.$store.state.sesion.token,
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
-          }
-        }).then(response => {
-        if (response.status !== 200) {
-          alert('Error en la petición. Intente nuevamente')
-        } else {
-          this.transformarInfo(response.data)
-        }
-      }).catch(e => {
-        console.log(e)
-      })
-    },
     eventCreated (event) {
       console.log('Event created')
-      event.customAttribute = this.getId()
+      this.newEvent.push(event)
       // console.log(event)
     }
   }

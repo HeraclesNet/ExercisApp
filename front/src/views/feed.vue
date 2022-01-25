@@ -62,7 +62,7 @@ export default {
   },
   data () {
     return {
-      sizePage: 15,
+      sizePage: 60,
       contents: null,
       pagina: 0,
       filtro: 'destacado',

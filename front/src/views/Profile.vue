@@ -214,6 +214,10 @@ export default {
           this.weight = response.data.user.weight
           this.gender = response.data.user.gender
           this.height = response.data.user.height
+          // this.visibilidad = response.data.user.visibilidad
+          this.seguido = response.data.followed
+          console.log('a', this.seguido)
+          console.log(response.data.followed)
         }
         console.log(response.data)
       }).catch(e => {

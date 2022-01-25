@@ -1,12 +1,12 @@
 export default class Event {
   text = null;
-  endT = null;
+  ent = null;
   date = null;
-  startT = 0;
+  startt = 0;
 
   constructor (date, start, end, name) {
-    this.start_t = start
-    this.end_t = end
+    this.startt = start
+    this.ent = end
     this.text = name
     this.date = date
   }
