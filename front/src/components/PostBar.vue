@@ -74,8 +74,9 @@ export default {
       })
     },
     crearPost: function (text) {
+      console.log(this.placeholder)
       var existe = true
-      if (this.url === 'OnlyText') {
+      if (this.url === 'OnlyText' || this.placeholder === null) {
         existe = false
       }
       const post = new Post(this.id, this.$store.state.sesion.name, text, existe)

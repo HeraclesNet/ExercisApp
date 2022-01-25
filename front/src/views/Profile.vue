@@ -5,6 +5,11 @@
       <h1>{{this.nickName}}</h1>
     </div>
     <div>
+      <md-button :to="{name:'Feed'}" style="color:#FFFBF4"> volver </md-button>
+      <md-button style="background-color:#fff; color:#ee2d2b;" v-if="liked" v-on:click="postNoSeguir()"> Ya estas siguiendo este usuario </md-button>
+      <md-button style="background-color:##ee2d2b; color:#fff;" v-if="liked" v-on:click="postSeguir()"> Seguir Usuario </md-button>
+    </div>
+    <div>
       <div id="profile">
      <md-card id="avatar">
        <md-card-header>
@@ -33,7 +38,7 @@
         </md-field>
         <md-field>
           <label>Fecha de Nacimiento</label>
-          <md-input v-model="born" disabled></md-input>
+          <md-input v-model="dateOfBirth" disabled></md-input>
         </md-field>
         <md-field>
           <label>Edad</label>
@@ -41,7 +46,7 @@
         </md-field>
         <md-field>
           <label>Nickname</label>
-          <md-input v-model="nick" disabled></md-input>
+          <md-input v-model="nickname" disabled></md-input>
         </md-field>
         <md-field>
           <label>Genero</label>
@@ -55,7 +60,7 @@
     </md-card>
     </div>
     </div>
-    <div id="userPost">
+    <div id="userPost" style="padding-left: 0px;">
       <ul>
         <li is="Post" v-for="Posts in userPosts" v-bind:Post= "Posts" v-bind:key="Posts.id"></li>
     </ul>

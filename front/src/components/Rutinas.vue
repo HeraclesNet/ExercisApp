@@ -13,6 +13,7 @@ import axios from 'axios'
 // import VueScheduler from 'v-calendar-scheduler'
 import 'v-calendar-scheduler/lib/main.css'
 import Event from '@/Objects/Event.js'
+import Rutinas from '@/Objects/Rutinas.js'
 export default {
   name: 'Rutinas',
   components: {
@@ -23,8 +24,8 @@ export default {
     }
   },
   created () {
-    console.log(this.temps)
-    this.getInfo()
+    // this.getInfo()
+    this.transformarInfo(this.temps)
   },
   data () {
     return {
@@ -42,11 +43,16 @@ export default {
       events: [],
       temps: [
         {
-          date: new Date(),
-          startTime: '13:00',
-          endTime: '15:00',
-          customAttribute: 'Im a custom attribute',
-          name: 'Example 1'
+          date: 'Mon Jan 21 2022 18:27:51 GMT-0500 (hora estándar de Colombia)',
+          startT: '13:00',
+          endT: '16:00',
+          text: '10 km trotando'
+        },
+        {
+          date: 'Mon Jan 22 2022 18:27:51 GMT-0500 (hora estándar de Colombia)',
+          startT: '13:00',
+          endT: '16:00',
+          text: '24 kilometros trotando'
         }
       ]
     }
@@ -56,7 +62,7 @@ export default {
       const temp = []
       for (var key in content) {
         var obj = content[key]
-        const event = new Event(obj.id, Date.parse(obj.date), obj.end_t, obj.start_t, obj.text)
+        const event = new Event(obj.id, Date.parse(obj.date), obj.endT, obj.startT, obj.text)
         temp.push(event)
       }
       this.events = temp
@@ -65,8 +71,8 @@ export default {
       const temp = []
       for (var key in this.events) {
         var obj = this.events[key]
-        const event = new Event(obj.customAttribute, obj.date, obj.startTime, obj.endTime, obj.name)
-        temp.push(event)
+        const rutinas = new Rutinas(obj.date, obj.startTime, obj.endTime, obj.name)
+        temp.push(rutinas)
       }
       console.log(temp)
       return (temp)
@@ -131,7 +137,7 @@ export default {
     eventCreated (event) {
       console.log('Event created')
       event.customAttribute = this.getId()
-      console.log(event)
+      // console.log(event)
     }
   }
 }

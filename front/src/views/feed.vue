@@ -3,7 +3,7 @@
   <NavBarHome/>
   <!-- Filtros -->
   <div id="filtros">
-    <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="changeFiltro('votos')">Mas Gustados</md-button>
+    <md-button style="background-color:#fff; color:#ee2d2b; " v-on:click="changeFiltro('votos')">Mas Gustados</md-button>
     <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="changeFiltro('nuevo')">Mas Nuevos</md-button>
     <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="changeFiltro('destacado')">Destacados</md-button>
   </div>
@@ -66,7 +66,8 @@ export default {
       contents: null,
       pagina: 0,
       filtro: 'destacado',
-      postUser: []
+      postUser: [],
+      test: []
     }
   },
   components: {
@@ -95,6 +96,9 @@ export default {
         temp.push(posts)
       }
       this.contents = temp.concat(this.contents)
+      // this.contents = temp.push(...this.contents)
+      // this.contents.push(...temp)
+      // this.contents.concat(this.temp)
     },
     // Agregar parametros de filtrados
     getDataDestacados: function () {
@@ -185,10 +189,8 @@ export default {
     getNextPost: function () {
       window.onscroll = () => {
         const bottomOfWindow = (document.documentElement.scrollTop + window.innerHeight === document.body.scrollHeight) || (document.documentElement.scrollTop + window.innerHeight > document.body.scrollHeight)
-        // const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight
         if (bottomOfWindow) {
           this.pagina = this.pagina + 1
-          console.log(this.pagina)
           if (this.filtro === 'destacado') {
             this.getDataDestacados()
           } else if (this.filtro === 'nuevo') {
@@ -221,6 +223,9 @@ export default {
 #card {
   display: flex;
   justify-content: center;
+}
+.md-button{
+  margin: 6px 8px;
 }
 .break {
   flex-basis: 100%;

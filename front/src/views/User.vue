@@ -39,7 +39,7 @@
         </md-field>
         <md-field>
           <label>Fecha de Nacimiento</label>
-          <md-input v-model="born" disabled></md-input>
+          <md-input v-model="dateOfBirth" disabled></md-input>
         </md-field>
         <md-field>
           <label>Edad</label>
@@ -47,7 +47,7 @@
         </md-field>
         <md-field>
           <label>Nickname</label>
-          <md-input v-model="nick" disabled></md-input>
+          <md-input v-model="nickName" disabled></md-input>
         </md-field>
         <md-field>
           <label>Genero</label>
@@ -130,7 +130,6 @@ export default {
       this.$store.state.sesion.refreshtoken = null
     },
     LoadInfo: function () {
-      this.token = this.$store.state.sesion.token
       this.email = this.$store.state.sesion.email
       this.name = this.$store.state.sesion.name
       this.nickName = this.$store.state.sesion.nickName
@@ -227,6 +226,7 @@ export default {
         }).then(response => {
         console.log(response.data.message)
         this.eliminar()
+        this.$router.push({ name: 'Home' })
       }).catch(e => {
         console.log(e)
       })
