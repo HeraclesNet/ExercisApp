@@ -72,6 +72,7 @@ export default {
       this.$store.state.sesion.height = this.height
       this.$store.state.sesion.gender = this.gender
       this.$store.state.sesion.refreshtoken = this.refreshtoken
+      this.$store.state.sesion.visibilidad = this.visibilidad
     },
     ingresar: function (rt) {
       if (rt === 200) {
@@ -107,6 +108,7 @@ export default {
         this.weight = response.data.user.weight
         this.gender = response.data.user.gender
         this.height = response.data.user.height
+        this.visibilidad = response.data.user.visibility
         this.ingresar(response.status)
       }).catch(e => {
         this.ingresar(e.response.status)

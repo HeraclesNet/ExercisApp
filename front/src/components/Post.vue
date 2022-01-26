@@ -1,16 +1,16 @@
 <template>
 <md-card md-with-hover>
         <md-ripple>
-          <md-card-header-text v-if="Post.getEscrito() !== null">
-            <div class="md-subhead">{{Post.getEscrito()}}</div>
-            <div class="md-subhead"> <router-link  :to="{name:'Profile', params:{nickName: Post.getNickName()}}">{{Post.getUser()}}</router-link> </div>
-          </md-card-header-text>
+          <md-card-header v-if="Post.getEscrito() !== null">
+            <div class="md-title" style="font-size:15px">{{Post.getEscrito()}}</div>
+          </md-card-header>
           <md-card-content v-if="Post.getExiste() === true">
             <md-card-media>
                <img :src = "Post.getUrl()"/>
             </md-card-media>
           </md-card-content>
-          <md-card-actions>
+          <md-card-actions md-alignment="space-between">
+          <div class="md-subhead"> <router-link  :to="{name:'Profile', params:{nickName: Post.getNickName()}}">{{Post.getUser()}}</router-link> </div>
             <md-button class="md-icon-button md-raised md-primary" v-if="liked" v-on:click="postdislike()">
               <md-icon>sports_mma</md-icon>
               {{Post.getMuscles()}}

@@ -3,9 +3,11 @@
   <NavBarHome/>
   <!-- Filtros -->
   <div id="filtros">
-    <md-button style="background-color:#fff; color:#ee2d2b;" v-on:click="changeFiltro('votos')">Mas Gustados</md-button>
-    <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="changeFiltro('nuevo')">Mas Nuevos</md-button>
-    <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="changeFiltro('destacado')">Destacados</md-button>
+    <md-tabs md-alignment="fixed">
+      <md-tab id="tab-home" md-label="Mas Gustados" style="background-color:#fff; color:#ee2d2b" v-on:click="changeFiltro('votos')"></md-tab>
+      <md-tab id="tab-pages" md-label="Nuevos" v-on:click="changeFiltro('nuevo')" style="background-color:#fff; color:#ee2d2b"></md-tab>
+      <md-tab id="tab-posts" md-label="Destacados" style="background-color:#fff; color:#ee2d2b" v-on:click="changeFiltro('destacado')"></md-tab>
+    </md-tabs>
   </div>
   <PostBar v-on:PostCreado="postear($event)"/>
   <div id="content">
@@ -232,6 +234,6 @@ export default {
   height: 0;
 }
 #filtros{
-  margin-left: 10px;
+  margin: 20px;
 }
 </style>

@@ -14,7 +14,8 @@ export const store = new Vuex.Store({
       weight: null,
       height: null,
       token: null,
-      refreshtoken: null
+      refreshtoken: null,
+      visibilidad: null
     }
   }
 })

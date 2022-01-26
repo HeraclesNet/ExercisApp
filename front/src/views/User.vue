@@ -1,10 +1,7 @@
 <template>
   <div class="user">
   <NavBarHome/>
-  <div id="nombre">
-    <h1>{{this.name}}</h1>
-  </div>
-  <div id="options">
+  <div id="options" style="margin-left:10px">
     <md-button :to="{name:'Feed'}" style="background-color:#fff; color:#ee2d2b" >Pagina Principal</md-button>
     <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('profile')">Informacion Personal</md-button>
     <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('postHistory')">Publicaciones pasadas</md-button>
@@ -31,11 +28,13 @@
         </md-field>
         <md-field>
           <label>Peso</label>
-          <md-input v-model="weight" :disabled="disabled"></md-input>
+          <md-input oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')" type="number" v-model="weight" :disabled="disabled"></md-input>
+          <span class="md-suffix">Kg</span>
         </md-field>
         <md-field>
           <label>Altura</label>
-          <md-input v-model="height" :disabled="disabled"></md-input>
+          <md-input type="number" oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')" v-model="height" :disabled="disabled"></md-input>
+          <span class="md-suffix">cm</span>
         </md-field>
         <md-field>
           <label>Fecha de Nacimiento</label>
@@ -43,22 +42,22 @@
         </md-field>
         <md-field>
           <label>Edad</label>
-          <md-input v-model="age" :disabled="disabled"></md-input>
+          <md-input type="number" oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')" v-model="age" :disabled="disabled"></md-input>
         </md-field>
         <md-field>
           <label>Nickname</label>
-          <md-input v-model="nickName" disabled></md-input>
+          <md-input v-model="nickname" disabled></md-input>
         </md-field>
         <md-field>
           <label>Genero</label>
-          <md-input v-model="gender" disabled></md-input>
+          <md-input v-model="genero" disabled></md-input>
         </md-field>
-        <md-radio v-model="radio">Mi perfil es visible para todos los Usuario</md-radio>
-        <md-radio v-model="radio">Mi Perfil es Privado</md-radio>
+        <md-radio v-model="visibilidad" :value="false">Mi perfil es visible para todos los Usuario</md-radio>
+        <md-radio v-model="visibilidad" :value="true">Mi Perfil es Privado</md-radio>
       </md-card-content>
       <md-card-actions>
         <md-button id="editar" v-if="!isHidden" v-on:click="disabled = !disabled; isHidden = true">Editar Perfil</md-button>
-        <md-button v-if="isHidden" v-on:click="disabled = !disabled; isHidden = false" style="color:#fff;background-color:#1d85cd">Guardar Cambios</md-button>
+        <md-button v-if="isHidden" v-on:click="disabled = !disabled; isHidden = false; setProfile()" style="color:#fff;background-color:#1d85cd">Guardar Cambios</md-button>
         <md-button style="color:#fff;background-color:#ee2d2b" v-on:click="eliminarCuenta()">Eliminar Cuenta</md-button>
       </md-card-actions>
     </md-card>
@@ -79,6 +78,7 @@ import NavBarHome from '@/components/NavBarHome.vue'
 // import PostBar from '@/components/PostBar.vue'
 import Post from '@/components/Post.vue'
 import Rutinas from '@/components/Rutinas.vue'
+import User from '@/Objects/User.js'
 import Posts from '@/Objects/Post.js'
 import axios from 'axios'
 export default {
@@ -126,13 +126,15 @@ export default {
       this.$store.state.sesion.dateOfBirth = null
       this.$store.state.sesion.weight = null
       this.$store.state.sesion.height = null
+      this.$store.state.sesion.visibilidad = null
       this.$store.state.sesion.gender = null
       this.$store.state.sesion.refreshtoken = null
     },
     LoadInfo: function () {
       this.email = this.$store.state.sesion.email
       this.name = this.$store.state.sesion.name
-      this.nickName = this.$store.state.sesion.nickName
+      this.nickname = this.$store.state.sesion.nickName
+      this.visibilidad = this.$store.state.sesion.visibilidadName
       this.dateOfBirth = this.$store.state.sesion.dateOfBirth
       this.weight = this.$store.state.sesion.weight
       this.height = this.$store.state.sesion.height
@@ -186,8 +188,10 @@ export default {
         this.getRutinas()
       }
     },
-    setProfile1: function () {
-      axios.get('http://localhost:8081/profile/user',
+    setProfile: function () {
+      const user = new User(this.weight, this.height, this.gender, this.visibilidad)
+      console.log(user)
+      axios.post('http://localhost:8081/profile/update/user', user,
         {
           headers: {
             Authorization: 'Bearer ' + this.$store.state.sesion.token,
@@ -195,6 +199,12 @@ export default {
             'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
           }
         }).then(response => {
+        this.transformarContenido(response.data.posts.content)
+        this.$store.state.sesion.weight = this.weight
+        this.$store.state.sesion.height = this.height
+        this.$store.state.sesion.gender = this.gender
+        this.$store.state.sesion.visibilidad = this.visibilidad
+      }).then(response => {
         this.transformarContenido(response.data.posts.content)
       }).catch(e => {
         console.log(e)

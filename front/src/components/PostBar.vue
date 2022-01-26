@@ -114,7 +114,6 @@ export default {
 }
 .md-card {
   width: 520px;
-  margin: 4px;
-  vertical-align: top;
+  margin: 15px;
 }
 </style>
