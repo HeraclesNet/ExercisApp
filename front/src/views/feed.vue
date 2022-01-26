@@ -3,7 +3,7 @@
   <NavBarHome/>
   <!-- Filtros -->
   <div id="filtros">
-    <md-button style="background-color:#fff; color:#ee2d2b; " v-on:click="changeFiltro('votos')">Mas Gustados</md-button>
+    <md-button style="background-color:#fff; color:#ee2d2b;" v-on:click="changeFiltro('votos')">Mas Gustados</md-button>
     <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="changeFiltro('nuevo')">Mas Nuevos</md-button>
     <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="changeFiltro('destacado')">Destacados</md-button>
   </div>

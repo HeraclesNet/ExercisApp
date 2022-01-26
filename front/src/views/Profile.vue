@@ -5,9 +5,9 @@
       <h1>{{this.nickName}}</h1>
     </div>
     <div>
-      <md-button :to="{name:'Feed'}" style="color:#FFFBF4"> volver </md-button>
-      <md-button style="background-color:#fff; color:#ee2d2b;" v-if="liked" v-on:click="postNoSeguir()"> Ya estas siguiendo este usuario </md-button>
-      <md-button style="background-color:##ee2d2b; color:#fff;" v-if="liked" v-on:click="postSeguir()"> Seguir Usuario </md-button>
+      <md-button style="background-color:#fff; color:#ee2d2b;" :to="{name:'Feed'}"> volver </md-button>
+      <md-button style="background-color:#fff; color:#ee2d2b;" v-if="seguido" v-on:click="postNoSeguir()"> Ya estas siguiendo este usuario </md-button>
+      <md-button style="background-color:##ee2d2b; color:#fff;" v-if="seguido" v-on:click="postSeguir()"> Seguir Usuario </md-button>
     </div>
     <div>
       <div id="profile">
