@@ -134,7 +134,7 @@ export default {
       this.email = this.$store.state.sesion.email
       this.name = this.$store.state.sesion.name
       this.nickname = this.$store.state.sesion.nickName
-      this.visibilidad = this.$store.state.sesion.visibilidadName
+      this.visibilidad = this.$store.state.sesion.visibilidad
       this.dateOfBirth = this.$store.state.sesion.dateOfBirth
       this.weight = this.$store.state.sesion.weight
       this.height = this.$store.state.sesion.height
