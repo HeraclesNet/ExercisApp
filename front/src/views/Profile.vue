@@ -6,25 +6,16 @@
       <md-button style="background-color:#fff; color:#ee2d2b;" v-if="seguido" v-on:click="postNoSeguir()"> Ya estas siguiendo este usuario </md-button>
       <md-button style="background-color:#fff; color:#ee2d2b;" v-if="!seguido" v-on:click="postSeguir()"> Seguir Usuario </md-button>
     </div>
-    <div>
-      <div id="profile">
+    <div id="profile">
+      <md-card id="profile-data" style="display: none;" v-if="visibilidad === false">
+        <md-card-header>
+          <div class="md-title">Este Perfil es privado</div>
+        </md-card-header>
+      </md-card>
      <md-card id="avatar">
-       <md-card-header>
-          <div class="md-title">Imagen</div>
-       </md-card-header>
       <md-card-media>
         <img src="../assets/avatar_default-01.png" alt="Usuario">
       </md-card-media>
-    </md-card>
-    <md-card id="profile-data" v-if="visibilidad === true">
-      <md-card-header>
-        <div class="md-title">Este Perfil es privado</div>
-      </md-card-header>
-    </md-card>
-    <md-card id="profile-data" v-if="visibilidad === false">
-      <md-card-header>
-        <div class="md-title">Perfil</div>
-      </md-card-header>
       <md-card-content>
         <md-field>
           <label>Nombre</label>
@@ -32,15 +23,15 @@
         </md-field>
         <md-field>
           <label>Peso</label>
-          <md-input v-model="weight" :disabled="disabled"></md-input>
+          <md-input v-model="weight" disabled></md-input>
         </md-field>
         <md-field>
           <label>Altura</label>
-          <md-input v-model="height" :disabled="disabled"></md-input>
+          <md-input v-model="height" disabled></md-input>
         </md-field>
         <md-field>
           <label>Edad</label>
-          <md-input v-model="age" :disabled="disabled"></md-input>
+          <md-input v-model="age" disabled></md-input>
         </md-field>
         <md-field>
           <label>Nickname</label>
@@ -48,20 +39,24 @@
         </md-field>
         <md-field>
           <label>Genero</label>
-          <md-input v-model="gender" disabled></md-input>
-        </md-field>
+          <md-select v-model="movie" name="movie" id="movie" :disabled="disabled">
+            <md-option value="true">Masculino</md-option>
+            <md-option value="false">Femenino</md-option>
+          </md-select>
+      </md-field>
       </md-card-content>
-      <md-button :to="{name:'Feed'}" style="color:#FFFBF4"> volver </md-button>
-      <md-button style="color:#FFFBF4" v-on:click="postSeguir()"> seguir </md-button>
+      <div id="profile-options" v-if="visibilidad === false">
+        <md-button :to="{name:'Feed'}" style="color:#FFFBF4"> volver </md-button>
+        <md-button style="color:#FFFBF4" v-on:click="postSeguir()"> seguir </md-button>
+      </div>
     </md-card>
+    <div id="userPost" style="padding-left: 0px; margin-top: 0px" v-if="(visibilidad === true) || (seguido === true)">
+        <ul>
+          <li is="Post" v-for="Posts in userPosts" v-bind:Post= "Posts" v-bind:key="Posts.id"></li>
+        </ul>
     </div>
-    </div>
-    <div id="userPost" style="padding-left: 0px;" v-if="(visibilidad === true) || (seguido === true)">
-      <ul>
-        <li is="Post" v-for="Posts in userPosts" v-bind:Post= "Posts" v-bind:key="Posts.id"></li>
-    </ul>
-    </div>
- </div>
+  </div>
+</div>
 </template>
 <script>
 import NavBarHome from '@/components/NavBarHome.vue'
@@ -225,6 +220,18 @@ export default {
 #avatar{
   font-family: 'TTOctosquares-Regular Regular';
   margin: 15px;
-  width: 15%;
+  width: 25%;
+  height: 15%;
+}
+#profile{
+  font-family: 'TTOctosquares-Regular Regular';
+  display: flex;
+  align-content: space-around;
+  flex-flow: wrap;
+  margin: 20px;
+}
+#userPost {
+  display: flex;
+  justify-content: center;
 }
 </style>

@@ -49,22 +49,34 @@
           <md-input v-model="nickname" disabled></md-input>
         </md-field>
         <md-field>
-          <label>Genero</label>
-          <md-input v-model="genero" disabled></md-input>
-        </md-field>
+        <label>Genero</label>
+        <md-select v-model="movie" name="movie" id="movie" :disabled="disabled">
+          <md-option value="true">Masculino</md-option>
+          <md-option value="false">Femenino</md-option>
+        </md-select>
+      </md-field>
+      <div id="vis">
         <md-radio v-model="visibilidad" :value="false">Mi perfil es visible para todos los Usuario</md-radio>
         <md-radio v-model="visibilidad" :value="true">Mi Perfil es Privado</md-radio>
+      </div>
       </md-card-content>
       <md-card-actions>
+        <md-dialog-confirm
+          :md-active.sync="first"
+          md-title="Desea eliminar su cuenta?"
+          md-confirm-text="Aceptar"
+          md-cancel-text="Cancelar"
+          @md-cancel="onCancel"
+          @md-confirm="eliminarCuenta()" />
         <md-button id="editar" v-if="!isHidden" v-on:click="disabled = !disabled; isHidden = true">Editar Perfil</md-button>
         <md-button v-if="isHidden" v-on:click="disabled = !disabled; isHidden = false; setProfile()" style="color:#fff;background-color:#1d85cd">Guardar Cambios</md-button>
-        <md-button style="color:#fff;background-color:#ee2d2b" v-on:click="eliminarCuenta()">Eliminar Cuenta</md-button>
+        <md-button style="color:#fff;background-color:#ee2d2b" @click="first = true">Eliminar Cuenta</md-button>
       </md-card-actions>
     </md-card>
   </div>
   <!-- Post history Usuario -->
   <div id="PublishedContent" v-if="displaying === 'postHistory'">
-    <ul style="padding-left: 0px;">
+    <ul style="padding-left: 0px; margin-top: 0px">
       <li id="card" is="Post" v-for="content in contents" v-bind:Post= "content" v-bind:key="content.id"></li>
     </ul>
   </div>
@@ -99,6 +111,7 @@ export default {
       displaying: 'profile',
       contents: null,
       disabled: 1,
+      first: false,
       isHidden: false,
       postUser: [],
       // Info usuario
@@ -264,5 +277,9 @@ export default {
 #options{
   font-family: 'TTOctosquares-Regular Regular';
   margin-left: 10px;
+}
+#PublishedContent {
+  display: flex;
+  justify-content: center;
 }
 </style>
