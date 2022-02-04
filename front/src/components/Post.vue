@@ -1,5 +1,5 @@
 <template>
-<md-card md-with-hover>
+      <md-card md-with-hover>
         <md-ripple>
           <md-card-header v-if="Post.getEscrito() !== null">
             <div class="md-title" style="font-size:15px">{{Post.getEscrito()}}</div>

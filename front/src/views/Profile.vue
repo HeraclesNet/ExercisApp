@@ -1,6 +1,22 @@
 <template>
   <div class="profile">
     <NavBarHome/>
+    <vue-scheduler
+      :events="events"
+      event-display="name"
+      :labels="{
+        today: 'Hoy',
+        back: 'Atrás',
+        next: 'Siguiente',
+        month: 'Mes',
+        week: 'Semana',
+        day: 'Día',
+        all_day: 'Todo el día'
+      }"
+      :available-views="['week', 'day']"
+      :initial-date = 'new Date()'
+      :disable-dialog = 'true'
+    />
     <div id="markers" style="margin-left:10px;">
       <md-button style="background-color:#fff; color:#ee2d2b;" :to="{name:'Feed'}"> volver </md-button>
       <md-button style="background-color:#fff; color:#ee2d2b;" v-if="seguido" v-on:click="postNoSeguir()"> Ya estas siguiendo este usuario </md-button>
@@ -61,6 +77,7 @@
 <script>
 import NavBarHome from '@/components/NavBarHome.vue'
 import Post from '@/components/Post.vue'
+import Event from '@/Objects/Event.js'
 import Posts from '@/Objects/Post.js'
 import axios from 'axios'
 export default {
@@ -93,7 +110,8 @@ export default {
       weight: null,
       height: null,
       userPosts: null,
-      seguido: false
+      seguido: false,
+      events: []
     }
   },
   components: {
@@ -208,6 +226,34 @@ export default {
           this.visibilidad = response.data.private
           this.seguido = response.data.followed
           console.log('a', this.visibilidad)
+        }
+      }).catch(e => {
+        console.log(e)
+      })
+    },
+    transformarEvents: function (content) {
+      const temp = []
+      for (var key in content) {
+        var obj = content[key]
+        const event = new Event(obj.id, Date.parse(obj.date), obj.ent, obj.startt, obj.text)
+        temp.push(event)
+      }
+      this.events = temp
+    },
+    getInfo: function () {
+      // const params = new URLSearchParams()
+      axios.get('http://localhost:8081/profile/get/rutina',
+        {
+          headers: {
+            Authorization: 'Bearer ' + this.$store.state.sesion.token,
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+          }
+        }).then(response => {
+        if (response.status !== 200) {
+          alert('Error en la petición. Intente nuevamente')
+        } else {
+          this.transformarEvents(response.data)
         }
       }).catch(e => {
         console.log(e)

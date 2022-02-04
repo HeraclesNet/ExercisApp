@@ -6,6 +6,7 @@
     <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('profile')">Informacion Personal</md-button>
     <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('postHistory')">Publicaciones pasadas</md-button>
     <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('rutinas')">Rutinas</md-button>
+    <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('seguidos')">Gente a la que sigues</md-button>
   </div>
   <!-- Info Usuario -->
   <div id="profile" v-if="displaying === 'profile'">
@@ -81,8 +82,25 @@
     </ul>
   </div>
   <!-- Rutinas -->
-  <div id="Rutinas" v-if="displaying === 'rutinas'"></div>
+  <div id="Rutinas" v-if="displaying === 'rutinas'">
     <Rutinas v-if="displaying === 'rutinas'"/>
+  </div>
+  <div id="Rutinas" v-if="displaying === 'seguidos'">
+    <ul style="padding-left: 0px;">
+      <li v-for="seguido in seguidos" v-bind:key="seguido.id">
+<md-card md-with-hover>
+        <md-ripple>
+          <md-card-header>
+            <div class="md-title" style="font-size:15px">{{seguido.name}}</div>
+          </md-card-header>
+          <md-card-actions>
+            <div class="md-subhead"> <router-link  :to="{name:'Profile', params:{nickName: seguido.nickName}}">{{seguido.nickName}}</router-link> </div>
+          </md-card-actions>
+        </md-ripple>
+      </md-card>
+      </li>
+    </ul>
+ </div>
  </div>
 </template>
 <script>
@@ -114,6 +132,7 @@ export default {
       first: false,
       isHidden: false,
       postUser: [],
+      seguidos: [],
       // Info usuario
       name: null,
       peso: null,
@@ -199,6 +218,8 @@ export default {
         this.getPosts()
       } else if (newDisplay === 'rutinas') {
         this.getRutinas()
+      } else if (newDisplay === 'seguidos') {
+        this.getSeguidores()
       }
     },
     setProfile: function () {
@@ -223,20 +244,6 @@ export default {
         console.log(e)
       })
     },
-    setProfile2: function () {
-      axios.get('http://localhost:8081/profile/user',
-        {
-          headers: {
-            Authorization: 'Bearer ' + this.$store.state.sesion.token,
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
-          }
-        }).then(response => {
-        this.transformarContenido(response.data.posts.content)
-      }).catch(e => {
-        console.log(e)
-      })
-    },
     eliminarCuenta: function () {
       console.log('no se que esta pasandooo')
       axios.delete('http://localhost:8081/user/delete/account',
@@ -250,6 +257,20 @@ export default {
         console.log(response.data.message)
         this.eliminar()
         this.$router.push({ name: 'Home' })
+      }).catch(e => {
+        console.log(e)
+      })
+    },
+    getSeguidores: function () {
+      axios.get('http://localhost:8081/post/user',
+        {
+          headers: {
+            Authorization: 'Bearer ' + this.$store.state.sesion.token,
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+          }
+        }).then(response => {
+        this.seguidos = response.data
       }).catch(e => {
         console.log(e)
       })

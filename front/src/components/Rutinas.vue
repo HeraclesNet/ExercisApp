@@ -1,6 +1,14 @@
 <template>
   <div>
-    <vue-scheduler @event-created="eventCreated" :events="events" :event-dialog-config="dialogConfig" event-display="name"/>
+    <vue-scheduler @event-created="eventCreated" :events="events" :event-dialog-config="dialogConfig" event-display="name" :labels="{
+        today: 'Hoy',
+        back: 'Atrás',
+        next: 'Siguiente',
+        month: 'Mes',
+        week: 'Semana',
+        day: 'Día',
+        all_day: 'Todo el día'
+      }"/>
     <div>
       <!-- md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="LoadInfo()">Deshacer</md-button-->
       <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="postInfo()">Guardar</md-button>
