@@ -76,6 +76,7 @@
 </template>
 <script>
 import NavBarHome from '@/components/NavBarHome.vue'
+import 'v-calendar-scheduler/lib/main.css'
 import Post from '@/components/Post.vue'
 import Event from '@/Objects/Event.js'
 import Posts from '@/Objects/Post.js'
@@ -91,6 +92,7 @@ export default {
   created () {
     this.getData()
     this.getPosts()
+    this.getInfo()
   },
   props: {
     nickName: String
@@ -241,8 +243,7 @@ export default {
       this.events = temp
     },
     getInfo: function () {
-      // const params = new URLSearchParams()
-      axios.get('http://localhost:8081/profile/get/rutina',
+      axios.get('http://localhost:8081/profile/get/rutina/nickName?nickName=' + this.nickName,
         {
           headers: {
             Authorization: 'Bearer ' + this.$store.state.sesion.token,

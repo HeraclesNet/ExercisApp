@@ -87,7 +87,7 @@
   </div>
   <div id="Rutinas" v-if="displaying === 'seguidos'">
     <ul style="padding-left: 0px;">
-      <li v-for="seguido in seguidos" v-bind:key="seguido.id">
+      <li v-for="seguido in seguidos" v-bind:key="seguido.email">
 <md-card md-with-hover>
         <md-ripple>
           <md-card-header>
@@ -262,7 +262,10 @@ export default {
       })
     },
     getSeguidores: function () {
-      axios.get('http://localhost:8081/post/user',
+      const params = new URLSearchParams()
+      params.append('PageNumber', 1)
+      params.append('pageSize', 30)
+      axios.get('http://localhost:8081/user/fans?' + params.toString(),
         {
           headers: {
             Authorization: 'Bearer ' + this.$store.state.sesion.token,
@@ -270,7 +273,7 @@ export default {
             'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
           }
         }).then(response => {
-        this.seguidos = response.data
+        this.seguidos = response.data.content
       }).catch(e => {
         console.log(e)
       })
