@@ -1,22 +1,6 @@
 <template>
   <div class="profile">
     <NavBarHome/>
-    <vue-scheduler
-      :events="events"
-      event-display="name"
-      :labels="{
-        today: 'Hoy',
-        back: 'Atrás',
-        next: 'Siguiente',
-        month: 'Mes',
-        week: 'Semana',
-        day: 'Día',
-        all_day: 'Todo el día'
-      }"
-      :available-views="['week', 'day']"
-      :initial-date = 'new Date()'
-      :disable-dialog = 'true'
-    />
     <div id="markers" style="margin-left:10px;">
       <md-button style="background-color:#fff; color:#ee2d2b;" :to="{name:'Feed'}"> volver </md-button>
       <md-button style="background-color:#fff; color:#ee2d2b;" v-if="seguido" v-on:click="postNoSeguir()"> Ya estas siguiendo este usuario </md-button>
@@ -46,26 +30,37 @@
           <md-input v-model="height" disabled></md-input>
         </md-field>
         <md-field>
-          <label>Edad</label>
-          <md-input v-model="age" disabled></md-input>
-        </md-field>
-        <md-field>
           <label>Nickname</label>
-          <md-input v-model="nickname" disabled></md-input>
+          <md-input v-model="nickName" disabled></md-input>
         </md-field>
         <md-field>
           <label>Genero</label>
-          <md-select v-model="movie" name="movie" id="movie" :disabled="disabled">
-            <md-option value="true">Masculino</md-option>
-            <md-option value="false">Femenino</md-option>
-          </md-select>
-      </md-field>
+           <md-input v-model="genero" disabled></md-input>
+        </md-field>
       </md-card-content>
       <div id="profile-options" v-if="visibilidad === false">
         <md-button :to="{name:'Feed'}" style="color:#FFFBF4"> volver </md-button>
         <md-button style="color:#FFFBF4" v-on:click="postSeguir()"> seguir </md-button>
       </div>
     </md-card>
+    <div id="calendario">
+     <vue-scheduler
+      :events="events"
+      event-display="name"
+      :labels="{
+        today: 'Hoy',
+        back: 'Atrás',
+        next: 'Siguiente',
+        month: 'Mes',
+        week: 'Semana',
+        day: 'Día',
+        all_day: 'Todo el día'
+      }"
+      :available-views="['week', 'day']"
+      :initial-date = 'new Date()'
+      :disable-dialog = 'true'
+    />
+    </div>
     <div id="userPost" style="padding-left: 0px; margin-top: 0px" v-if="(visibilidad === true) || (seguido === true)">
         <ul>
           <li is="Post" v-for="Posts in userPosts" v-bind:Post= "Posts" v-bind:key="Posts.id"></li>
@@ -104,11 +99,13 @@ export default {
   },
   data () {
     return {
+      disabled: true,
       email: null,
       name: null,
       visibilidad: null,
       dateOfBirth: null,
       gender: null,
+      genero: null,
       weight: null,
       height: null,
       userPosts: null,
@@ -227,6 +224,11 @@ export default {
           this.height = response.data.user.height
           this.visibilidad = response.data.private
           this.seguido = response.data.followed
+          if (this.gender) {
+            this.genero = 'Masculino'
+          } else {
+            this.genero = 'Femenino'
+          }
           console.log('a', this.visibilidad)
         }
       }).catch(e => {
@@ -280,5 +282,16 @@ export default {
 #userPost {
   display: flex;
   justify-content: center;
+}
+#calendario{
+  display: flex;
+  width: 50%;
+}
+.v-cal{
+  width: 150%;
+  margin: 15px;
+}
+#markers{
+  font-family: 'TTOctosquares-Regular Regular';
 }
 </style>

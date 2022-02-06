@@ -9,10 +9,7 @@
         day: 'Día',
         all_day: 'Todo el día'
       }"/>
-    <div>
-      <!-- md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="LoadInfo()">Deshacer</md-button-->
       <md-button style="background-color:#fff; color:#ee2d2b; margin: 6px 8px;" v-on:click="postInfo()">Guardar</md-button>
-    </div>
   </div>
 </template>
 

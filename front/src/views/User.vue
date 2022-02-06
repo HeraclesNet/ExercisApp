@@ -2,7 +2,7 @@
   <div class="user">
   <NavBarHome/>
   <div id="options" style="margin-left:10px">
-    <md-button :to="{name:'Feed'}" style="background-color:#fff; color:#ee2d2b" >Pagina Principal</md-button>
+    <md-button :to="{name:'Feed'}" style="background-color:#fff; color:#ee2d2b; margin-left:10px;" >Pagina Principal</md-button>
     <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('profile')">Informacion Personal</md-button>
     <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('postHistory')">Publicaciones pasadas</md-button>
     <md-button style="background-color:#fff; color:#ee2d2b" v-on:click="changeDisplay('rutinas')">Rutinas</md-button>
@@ -42,16 +42,12 @@
           <md-input v-model="dateOfBirth" disabled></md-input>
         </md-field>
         <md-field>
-          <label>Edad</label>
-          <md-input type="number" oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')" v-model="age" :disabled="disabled"></md-input>
-        </md-field>
-        <md-field>
           <label>Nickname</label>
           <md-input v-model="nickname" disabled></md-input>
         </md-field>
         <md-field>
         <label>Genero</label>
-        <md-select v-model="movie" name="movie" id="movie" :disabled="disabled">
+        <md-select v-model="gender" :disabled="disabled">
           <md-option value="true">Masculino</md-option>
           <md-option value="false">Femenino</md-option>
         </md-select>
@@ -305,5 +301,9 @@ export default {
 #PublishedContent {
   display: flex;
   justify-content: center;
+}
+#Rutinas {
+  font-family: 'TTOctosquares-Regular Regular';
+  margin: 20px;
 }
 </style>

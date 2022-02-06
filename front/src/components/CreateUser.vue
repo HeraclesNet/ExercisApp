@@ -10,7 +10,7 @@
     </md-datepicker>
     <md-field>
       <md-icon>face</md-icon>
-      <label>Sobrenombre</label>
+      <label>Apodo</label>
       <md-input v-model="nickName"></md-input>
     </md-field>
     <md-field>
@@ -84,6 +84,7 @@ export default {
         this.crear(response.status)
       }).catch(e => {
         console.log(e)
+        alert(e.response.data.message)
       })
     }
   }
